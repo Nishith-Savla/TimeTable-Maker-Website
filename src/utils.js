@@ -48,8 +48,20 @@ const subjects = {
     "Specialized Course in Computer Engineering",
     "Advanced Database Lab",
     "Elective-II (Robotics/Cloud Computing) lab",
-    "",
   ],
 };
 
-export { subjects as default };
+const teachers = [
+  "Ms. Niti Patel",
+  "Dr. Sopan Kolte",
+  "Ms. Snehal Suryavanshi",
+  "Ms. Varsha Kinge",
+  "Mrs. Charulata Pinge",
+  "Mr. Debraj Moulik",
+  "Mr. Dnyandev Shinde",
+  "Mr. Swapnil Tambe",
+  "Mrs. Rupali Patil",
+  "Mr. Jayesh Mane",
+];
+
+export { subjects, teachers };

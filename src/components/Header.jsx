@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
-import subjects from "../utils";
+import { subjects, teachers } from "../utils";
 
-/* eslint no-unused-vars: "off" */
+// /* eslint no-unused-vars: "off" */
 const Header = () => {
   const [isOddTerm, setIsOddTerm] = useState(true);
   const [currentSem, setCurrentSem] = useState(isOddTerm ? 1 : 2);
@@ -28,7 +28,7 @@ const Header = () => {
   }, [isOddTerm]);
 
   return (
-    <>
+    <div>
       <Dropdown
         name="term"
         options={[
@@ -50,10 +50,19 @@ const Header = () => {
           key={subject}
           name={subject}
           text={subject}
-          onClick={console.log(subject)}
+          onClick={() => console.log(subject)}
         />
       ))}
-    </>
+      <br />
+      {teachers.map(teacher => (
+        <Button
+          key={teacher}
+          name={teacher}
+          text={teacher}
+          onClick={() => console.log(teacher)}
+        />
+      ))}
+    </div>
   );
 };
 
