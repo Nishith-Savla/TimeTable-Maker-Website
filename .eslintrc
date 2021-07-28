@@ -1,0 +1,17 @@
+{
+  "extends": ["eslint:recommended", "airbnb", "prettier"],
+  "env": { "browser": true },
+  "parser": "babel-eslint",
+  "rules": {
+    "no-plusplus": "off",
+    // allow jsx syntax in js files
+    "react/jsx-filename-extension": [1, { "extensions": ["js", "jsx"] }],
+    "react/prop-types": "off",
+    // suppress errors for missing 'import React' in files
+    "react/react-in-jsx-scope": "off",
+    "arrow-body-style": "off"
+    // "react/jsx-props-no-spreading": "off",
+    // "import/prefer-default-export": "off",
+    // "react/no-array-index-key": "off",
+  }
+}
