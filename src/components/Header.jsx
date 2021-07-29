@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { subjects, teachers } from "../utils";
@@ -6,7 +7,7 @@ import { subjects, teachers } from "../utils";
 // /* eslint no-unused-vars: "off" */
 const Header = () => {
   const [isOddTerm, setIsOddTerm] = useState(true);
-  const [currentSem, setCurrentSem] = useState(isOddTerm ? 1 : 2);
+  const [currentSem, setCurrentSem] = useState(1);
 
   const sems = [1, 2, 3, 4, 5, 6];
   let filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
@@ -47,20 +48,26 @@ const Header = () => {
       ))}
       {subjects[currentSem].map(subject => (
         <Button
+          className="button"
           key={subject}
           name={subject}
           text={subject}
           onClick={() => console.log(subject)}
-        />
+        >
+          <Cross />
+        </Button>
       ))}
       <br />
       {teachers.map(teacher => (
         <Button
+          className="button"
           key={teacher}
           name={teacher}
           text={teacher}
           onClick={() => console.log(teacher)}
-        />
+        >
+          <Cross />
+        </Button>
       ))}
     </div>
   );
