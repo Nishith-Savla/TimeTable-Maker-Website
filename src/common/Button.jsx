@@ -2,16 +2,18 @@ import React from "react";
 
 const Button = ({ name, children, className, text, onClick }) => {
   return (
-    <button
-      className={className}
-      type="button"
-      name={name}
-      id={name}
-      onClick={onClick}
-    >
-      {text}
+    <div className={className}>
+      <button
+        style={{ background: "transparent" }}
+        type="button"
+        name={name}
+        id={name}
+        onClick={onClick}
+      >
+        {text}
+      </button>
       {children}
-    </button>
+    </div>
   );
 };
 

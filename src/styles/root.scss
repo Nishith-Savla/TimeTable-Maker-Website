@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #fff;
+  font-family: Roboto;
 }
 
 body {
@@ -12,19 +11,71 @@ body {
   width: 100%;
 }
 
-.button {
-  padding: 7.5px 32px 7.5px 12px;
+button {
   border: none;
   outline: none;
-  background: linear-gradient(93.36deg, #77fcec 0%, #77fe84 100%);
-  border-radius: 25px;
-  position: relative;
+  font-size: 1rem;
 }
 
-svg {
-  margin-left: 5px;
-  margin-top: -1.5px;
-  position: absolute;
-  background-color: transparent;
-  padding-left: 1px;
+.sem-select {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0;
+
+  .dropdown {
+    margin-left: unquote("min(40px, 5%)");
+    border: none;
+    font-size: 1rem;
+  }
+
+  .sems {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    .sem {
+      background-color: #c4c4c4;
+      border-radius: 25px;
+      padding: 5px 20px;
+    }
+  }
+}
+
+.button {
+  padding: 5px 0px 5px 8px;
+  background: linear-gradient(93.36deg, #77fcec 0%, #77fe84 100%);
+  border-radius: 25px;
+  vertical-align: middle;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    background-color: transparent;
+    padding: 0px 10px;
+  }
+
+  svg {
+    margin-right: 10px;
+    background-color: transparent;
+  }
+}
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.subject {
+  margin: 5px 20px;
+}
+
+.teachers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.teacher {
+  margin: 10px 0px;
 }

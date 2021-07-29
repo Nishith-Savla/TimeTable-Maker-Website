@@ -30,45 +30,56 @@ const Header = () => {
 
   return (
     <div>
-      <Dropdown
-        name="term"
-        options={[
-          { value: "odd", label: "Odd" },
-          { value: "even", label: "Even" },
-        ]}
-        onChange={handleTermChange}
-      />
-      {filteredSems.map(filteredSem => (
-        <Button
-          key={filteredSem}
-          name={`sem${filteredSem}`}
-          text={`Sem ${filteredSem}`}
-          onClick={() => handleSemChange(filteredSem)}
+      <div className="sem-select">
+        <Dropdown
+          name="term"
+          className="dropdown"
+          options={[
+            { value: "odd", label: "Odd" },
+            { value: "even", label: "Even" },
+          ]}
+          onChange={handleTermChange}
         />
-      ))}
-      {subjects[currentSem].map(subject => (
-        <Button
-          className="button"
-          key={subject}
-          name={subject}
-          text={subject}
-          onClick={() => console.log(subject)}
-        >
-          <Cross />
-        </Button>
-      ))}
-      <br />
-      {teachers.map(teacher => (
-        <Button
-          className="button"
-          key={teacher}
-          name={teacher}
-          text={teacher}
-          onClick={() => console.log(teacher)}
-        >
-          <Cross />
-        </Button>
-      ))}
+        <div className="sems">
+          {filteredSems.map(sem => (
+            <Button
+              className="sem"
+              key={sem}
+              name={`sem${sem}`}
+              text={`Sem ${sem}`}
+              onClick={() => handleSemChange(sem)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="subjects">
+        {subjects[currentSem].map(subject => (
+          <Button
+            className="button subject"
+            key={subject}
+            name={subject}
+            text={subject}
+            onClick={() => console.log(subject)}
+          >
+            <Cross />
+          </Button>
+        ))}
+      </div>
+
+      <div className="teachers">
+        {teachers.map(teacher => (
+          <Button
+            className="button teacher"
+            key={teacher}
+            name={teacher}
+            text={teacher}
+            onClick={() => console.log(teacher)}
+          >
+            <Cross />
+          </Button>
+        ))}
+      </div>
     </div>
   );
 };

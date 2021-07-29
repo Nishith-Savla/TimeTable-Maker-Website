@@ -11,8 +11,8 @@ const subjects = {
     "Physics-II",
     "Applied Mathematics",
     "Programming in C",
-    "(Physics-I & Computer Peripherals and Maintenance) Lab",
     "Programming in C lab",
+    "(Physics-I & Computer Peripherals and Maintenance) Lab",
   ],
   3: [
     "OOPS Using C++",
@@ -52,16 +52,16 @@ const subjects = {
 };
 
 const teachers = [
-  "Ms. Niti Patel",
-  "Dr. Sopan Kolte",
-  "Ms. Snehal Suryavanshi",
-  "Ms. Varsha Kinge",
   "Mrs. Charulata Pinge",
   "Mr. Debraj Moulik",
   "Mr. Dnyandev Shinde",
-  "Mr. Swapnil Tambe",
-  "Mrs. Rupali Patil",
   "Mr. Jayesh Mane",
+  "Ms. Niti Patel",
+  "Mrs. Rupali Patil",
+  "Ms. Snehal Suryavanshi",
+  "Dr. Sopan Kolte",
+  "Mr. Swapnil Tambe",
+  "Ms. Varsha Kinge",
 ];
 
 export { subjects, teachers };
