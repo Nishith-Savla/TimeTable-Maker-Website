@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
-import { subjects, teachers } from "../utils";
+import { subjects } from "../utils";
 
 // /* eslint no-unused-vars: "off" */
 const Header = () => {
@@ -29,7 +29,7 @@ const Header = () => {
   }, [isOddTerm]);
 
   return (
-    <div>
+    <div className="app-header">
       <div className="sem-select">
         <Dropdown
           name="term"
@@ -61,20 +61,6 @@ const Header = () => {
             name={subject}
             text={subject}
             onClick={() => console.log(subject)}
-          >
-            <Cross />
-          </Button>
-        ))}
-      </div>
-
-      <div className="teachers">
-        {teachers.map(teacher => (
-          <Button
-            className="button teacher"
-            key={teacher}
-            name={teacher}
-            text={teacher}
-            onClick={() => console.log(teacher)}
           >
             <Cross />
           </Button>

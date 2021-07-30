@@ -1,52 +1,52 @@
 const subjects = {
   1: [
-    "Communication Skills",
     "Basic Mathematics",
-    "Physics-I",
+    "Communication Skills",
     "Computer & ICT Lab",
+    "Physics-I",
     "Web Design Lab",
   ],
   2: [
+    "Applied Mathematics",
     "Communication Practice",
     "Physics-II",
-    "Applied Mathematics",
     "Programming in C",
     "Programming in C lab",
     "(Physics-I & Computer Peripherals and Maintenance) Lab",
   ],
   3: [
-    "OOPS Using C++",
     "Computer Network",
+    "Computer Organization",
     "Digital Electronics",
     "Engineering Mathematics",
-    "Computer Organization",
+    "OOPS Using C++",
     "(OOPS Using C++ & PHP) lab",
     "(Basic Digital Electronics & Computer Organization) Lab",
   ],
   4: [
     "Core Java",
-    "Operating Systems",
     "Data Structures",
-    "Microprocessor",
     "Database Management System",
-    "(Core Java & Database Management System ) Lab",
+    "Microprocessor",
     "Microprocessor Lab",
+    "Operating Systems",
+    "(Core Java & Database Management System ) Lab",
   ],
   5: [
-    "Linux and Network",
     "Advanced Java",
+    "Linux and Network",
+    "Project",
     "Software Engineering",
     "Elective-I (Python/Android) lab",
     "(Advanced Java and Web Technology) Lab",
-    "Project",
     "(Linux and Network Administration) Lab",
   ],
   6: [
-    "Management",
     "Advanced Database",
+    "Advanced Database Lab",
+    "Management",
     "System security",
     "Specialized Course in Computer Engineering",
-    "Advanced Database Lab",
     "Elective-II (Robotics/Cloud Computing) lab",
   ],
 };
@@ -64,4 +64,6 @@ const teachers = [
   "Ms. Varsha Kinge",
 ];
 
-export { subjects, teachers };
+const columnWidths = [13.33, 13.33, 13.33, 5, 13.33, 13.33, 1.67, 13.33, 13.33];
+
+export { subjects, teachers, columnWidths };

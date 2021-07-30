@@ -1,3 +1,12 @@
+%black-border {
+  border: 1px solid black;
+}
+
+%display-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -30,9 +39,8 @@ button {
 
   .sems {
     width: 100%;
-    display: flex;
+    @extend %display-flex-wrap;
     justify-content: space-evenly;
-    flex-wrap: wrap;
     .sem {
       background-color: #c4c4c4;
       border-radius: 25px;
@@ -61,21 +69,40 @@ button {
 }
 
 .subjects {
-  display: flex;
-  flex-wrap: wrap;
+  @extend %display-flex-wrap;
   align-items: flex-start;
+
+  .subject {
+    margin: 5px 20px;
+  }
 }
 
-.subject {
-  margin: 5px 20px;
+.app-body {
+  @extend %display-flex-wrap;
+  margin-top: 20px;
 }
 
 .teachers {
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  .teacher {
+    margin: 10px 0px;
+  }
 }
 
-.teacher {
-  margin: 10px 0px;
+.timetable {
+  @extend %black-border;
+  border-collapse: collapse;
+  flex-grow: 2;
+
+  th {
+    @extend %black-border;
+  }
+
+  td {
+    @extend %black-border;
+  }
 }

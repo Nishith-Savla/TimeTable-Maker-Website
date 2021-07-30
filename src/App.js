@@ -1,10 +1,16 @@
 import "./App.css";
+import Body from "./components/Body";
 import Header from "./components/Header";
 
 import "./styles/root.scss";
 
 function App() {
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <Body />
+    </>
+  );
 }
 
 export default App;
