@@ -45,6 +45,7 @@ const Header = () => {
             <Button
               className="sem"
               key={sem}
+              isActive={sem === currentSem}
               name={`sem${sem}`}
               text={`Sem ${sem}`}
               onClick={() => handleSemChange(sem)}

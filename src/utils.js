@@ -35,7 +35,6 @@ const subjects = {
   5: [
     "Advanced Java",
     "Linux and Network",
-    "Project",
     "Software Engineering",
     "Elective-I (Python/Android) lab",
     "(Advanced Java and Web Technology) Lab",
