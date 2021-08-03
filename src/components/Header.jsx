@@ -1,33 +1,15 @@
-import { useState, useEffect } from "react";
-import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
-import { subjects } from "../utils";
+import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 
-// /* eslint no-unused-vars: "off" */
-const Header = () => {
-  const [isOddTerm, setIsOddTerm] = useState(true);
-  const [currentSem, setCurrentSem] = useState(1);
-
-  const sems = [1, 2, 3, 4, 5, 6];
-  let filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
-
-  const handleTermChange = () => {
-    setIsOddTerm(prev => !prev);
-  };
-
-  const handleSemChange = sem => {
-    setCurrentSem(sem);
-  };
-
-  // Change sems on term change
-  useEffect(() => {
-    // console.debug(isOddTerm);
-    filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
-    setCurrentSem(filteredSems[0]);
-    // console.log(buttons);
-  }, [isOddTerm]);
-
+const Header = ({
+  subjects,
+  onDelete,
+  currentSem,
+  onSemChange,
+  onTermChange,
+  filteredSems,
+}) => {
   return (
     <div className="app-header">
       <div className="sem-select">
@@ -38,7 +20,7 @@ const Header = () => {
             { value: "odd", label: "Odd" },
             { value: "even", label: "Even" },
           ]}
-          onChange={handleTermChange}
+          onChange={onTermChange}
         />
         <div className="sems">
           {filteredSems.map(sem => (
@@ -48,7 +30,7 @@ const Header = () => {
               isActive={sem === currentSem}
               name={`sem${sem}`}
               text={`Sem ${sem}`}
-              onClick={() => handleSemChange(sem)}
+              onClick={() => onSemChange(sem)}
             />
           ))}
         </div>
@@ -63,7 +45,12 @@ const Header = () => {
             text={subject}
             onClick={() => console.log(subject)}
           >
-            <Cross />
+            <Cross
+              onClick={e => {
+                e.stopPropagation();
+                onDelete(subject);
+              }}
+            />
           </Button>
         ))}
       </div>

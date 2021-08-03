@@ -51,8 +51,8 @@ const subjects = {
 };
 
 const teachers = [
-  "Mrs. Charulata Pinge",
-  "Mr. Debraj Moulik",
+  "Mrs. Charulata Ingle",
+  "Mr. Debraj Moulick",
   "Mr. Dnyandev Shinde",
   "Mr. Jayesh Mane",
   "Ms. Niti Patel",

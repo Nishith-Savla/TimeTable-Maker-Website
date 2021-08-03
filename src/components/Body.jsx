@@ -37,8 +37,11 @@ const Body = () => {
             name={teacher}
             text={teacher}
             onClick={() => console.log(teacher)}
+            
           >
+
             <Cross />
+            
           </Button>
         ))}
       </div>
