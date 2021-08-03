@@ -7,6 +7,13 @@
   flex-wrap: wrap;
 }
 
+%selected {
+  background: linear-gradient(93deg, #77fcec 0%, #77fe84 100%);
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -38,18 +45,17 @@ button {
   }
 
   .sems {
-    width: 100%;
     @extend %display-flex-wrap;
+    width: 100%;
     justify-content: space-evenly;
 
     .sem {
-      background: #c4c4c4;
+      background: #eee;
       border-radius: 25px;
       padding: 5px 20px;
 
       &.active {
-        background: linear-gradient(93.36deg, #77fcec 0%, #77fe84 100%);
-        font-weight: bold;
+        @extend %selected;
       }
     }
   }
@@ -57,10 +63,15 @@ button {
 
 .button {
   padding: 6px 2px 6px 10.5px;
-  background: linear-gradient(93.36deg, #77fcec 0%, #77fe84 100%);
+  background: #eee;
   border-radius: 25px;
   display: flex;
   justify-content: space-between;
+  transition: all 0.5s ease;
+
+  &.selected {
+    @extend %selected;
+  }
 
   svg {
     margin: 0px 10px;
@@ -98,10 +109,7 @@ button {
   border-collapse: collapse;
   flex-grow: 2;
 
-  th {
-    @extend %black-border;
-  }
-
+  th,
   td {
     @extend %black-border;
   }

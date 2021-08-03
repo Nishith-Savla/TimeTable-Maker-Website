@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { ReactComponent as Cross } from "../assets/CrossVector.svg";
+import { ReactComponent as Tick } from "../assets/TickVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { subjects } from "../utils";
 
 // /* eslint no-unused-vars: "off" */
-const Header = () => {
+const Header = ({ selectedComponents, onComponentSelect }) => {
   const [isOddTerm, setIsOddTerm] = useState(true);
   const [currentSem, setCurrentSem] = useState(1);
 
@@ -55,17 +56,29 @@ const Header = () => {
       </div>
 
       <div className="subjects">
-        {subjects[currentSem].map(subject => (
-          <Button
-            className="button subject"
-            key={subject}
-            name={subject}
-            text={subject}
-            onClick={() => console.log(subject)}
-          >
-            <Cross />
-          </Button>
-        ))}
+        {subjects[currentSem].map(subject => {
+          const isSelected = selectedComponents.subject === subject;
+          return (
+            <Button
+              className={`button subject ${isSelected ? "selected" : ""}`}
+              key={subject}
+              name={subject}
+              text={subject}
+              onClick={() => onComponentSelect(subject, "subject")}
+            >
+              {isSelected ? (
+                <Tick />
+              ) : (
+                <Cross
+                  onClick={e => {
+                    e.stopPropagation();
+                    console.log("delete");
+                  }}
+                />
+              )}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );
