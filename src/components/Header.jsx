@@ -1,8 +1,12 @@
+import { ReactComponent as Cross } from "../assets/CrossVector.svg";
+import { ReactComponent as Tick } from "../assets/TickVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
-import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 
+// /* eslint no-unused-vars: "off" */
 const Header = ({
+  selectedComponents,
+  onComponentSelect,
   subjects,
   onDelete,
   currentSem,
@@ -37,22 +41,29 @@ const Header = ({
       </div>
 
       <div className="subjects">
-        {subjects[currentSem].map(subject => (
-          <Button
-            className="button subject"
-            key={subject}
-            name={subject}
-            text={subject}
-            onClick={() => console.log(subject)}
-          >
-            <Cross
-              onClick={e => {
-                e.stopPropagation();
-                onDelete(subject);
-              }}
-            />
-          </Button>
-        ))}
+        {subjects[currentSem].map(subject => {
+          const isSelected = selectedComponents.subject === subject;
+          return (
+            <Button
+              className={`button subject ${isSelected ? "selected" : ""}`}
+              key={subject}
+              name={subject}
+              text={subject}
+              onClick={() => onComponentSelect(subject, "subject")}
+            >
+              {isSelected ? (
+                <Tick />
+              ) : (
+                <Cross
+                  onClick={e => {
+                    e.stopPropagation();
+                    onDelete(subject);
+                  }}
+                />
+              )}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );

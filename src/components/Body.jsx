@@ -1,9 +1,10 @@
 import Table from "../common/Table";
 import { teachers } from "../utils";
 import { ReactComponent as Cross } from "../assets/CrossVector.svg";
+import { ReactComponent as Tick } from "../assets/TickVector.svg";
 import Button from "../common/Button";
 
-const Body = () => {
+const Body = ({ selectedComponents, onComponentSelect }) => {
   return (
     <div className="app-body">
       <Table
@@ -30,20 +31,20 @@ const Body = () => {
       />
 
       <div className="teachers">
-        {teachers.map(teacher => (
-          <Button
-            className="button teacher"
-            key={teacher}
-            name={teacher}
-            text={teacher}
-            onClick={() => console.log(teacher)}
-            
-          >
-
-            <Cross />
-            
-          </Button>
-        ))}
+        {teachers.map(teacher => {
+          const isSelected = selectedComponents.teacher === teacher;
+          return (
+            <Button
+              className={`button teacher ${isSelected ? "selected" : ""}`}
+              key={teacher}
+              name={teacher}
+              text={teacher}
+              onClick={() => onComponentSelect(teacher, "teacher")}
+            >
+              {isSelected ? <Tick /> : <Cross />}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );
