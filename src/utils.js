@@ -51,19 +51,19 @@ const subjects = {
 };
 
 const teachers = [
-  "Mrs. Charulata Ingle",
-  "Mr. Debraj Moulick",
-  "Mr. Dnyandev Shinde",
   "Mr. Jayesh Mane",
-  "Ms. Niti Patel",
-  "Mrs. Rupali Patil",
-  "Ms. Snehal Suryavanshi",
+  "Mr. Debraj Moulick",
   "Dr. Sopan Kolte",
-  "Mr. Swapnil Tambe",
   "Ms. Varsha Kinge",
+  "Mrs. Rupali Patil",
+  "Ms. Niti Patel",
+  "Mr. Swapnil Tambe",
+  "Mr. Dnyandev Shinde",
+  "Mrs. Charulata Ingle",
+  "Ms. Snehal Suryavanshi",
 ];
 
-const columnWidths = [13.33, 13.33, 13.33, 5, 13.33, 13.33, 1.67, 13.33, 13.33];
+const columnWidths = [8, 14, 14, 4, 14, 14, 4, 14, 14];
 
 const allowDrop = ev => ev.preventDefault();
 

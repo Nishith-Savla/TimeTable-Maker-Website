@@ -5,6 +5,7 @@ import { drag } from "../utils";
 
 const Header = ({
   subjects,
+  teachers,
   onDelete,
   currentSem,
   onSemChange,
@@ -49,6 +50,23 @@ const Header = ({
               onDragStart={drag}
             >
               <Cross onClick={() => onDelete(subject, "subject")} />
+            </Button>
+          );
+        })}
+      </div>
+
+      <div className="teachers">
+        {teachers.map(teacher => {
+          return (
+            <Button
+              className="button teacher"
+              key={teacher}
+              name={teacher}
+              text={teacher}
+              draggable
+              onDragStart={drag}
+            >
+              <Cross onClick={() => onDelete(teacher, "teacher")} />
             </Button>
           );
         })}

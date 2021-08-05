@@ -1,9 +1,7 @@
-import Table from "../common/Table";
-import { ReactComponent as Cross } from "../assets/CrossVector.svg";
-import Button from "../common/Button";
-import { drag, allowDrop, drop } from "../utils";
+import Table from "../common/DivSpanTable";
+import { allowDrop, drop } from "../utils";
 
-const Body = ({ teachers, onDelete }) => {
+const Body = () => {
   return (
     <div className="app-body">
       <Table
@@ -30,24 +28,6 @@ const Body = ({ teachers, onDelete }) => {
         onDrop={drop}
         onDragOver={allowDrop}
       />
-
-      <div className="teachers">
-        {teachers.map(teacher => {
-          return (
-            <Button
-              className="button teacher"
-              key={teacher}
-              name={teacher}
-              text={teacher}
-              draggable
-              onDragStart={drag}
-            >
-              <Cross onClick={() => onDelete(teacher, "teacher")} />
-            </Button>
-          );
-        })}
-        ;
-      </div>
     </div>
   );
 };

@@ -53,8 +53,9 @@ function App() {
         onTermChange={handleTermChange}
         onSemChange={handleSemChange}
         filteredSems={filteredSems}
+        teachers={teachers}
       />
-      <Body teachers={teachers} onDelete={deleteElement} />
+      <Body />
     </>
   );
 }

@@ -8,23 +8,34 @@
 }
 
 %selected {
-  background: linear-gradient(93deg, #77fcec 0%, #77fe84 100%);
+  background: linear-gradient(
+    93deg,
+    hsl(173, 100%, 65%) 0%,
+    hsl(120, 100%, 65%) 100%
+  );
   font-weight: bold;
   letter-spacing: 1px;
   transition: all 0.5s ease;
 }
 
-* {
+body,
+html {
   margin: 0;
   padding: 0;
+}
+
+* {
   box-sizing: border-box;
-  background-color: #fff;
   font-family: Roboto;
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   width: 100%;
+}
+
+.app-header {
+  height: 32vh;
 }
 
 button {
@@ -79,13 +90,27 @@ button {
   }
 }
 
-.subjects {
+.subjects,
+.teachers {
   @extend %display-flex-wrap;
-  align-items: flex-start;
 
-  .subject {
-    margin: 5px 20px;
+  .subject,
+  .teacher {
+    margin: 6px 20px;
   }
+}
+
+.subject {
+  background: hsl(173, 100%, 65%);
+  letter-spacing: 0.05ch;
+}
+
+.teacher {
+  background: hsl(120, 100%, 65%);
+}
+
+.teachers {
+  margin: 10px 0px;
 }
 
 .app-body {
@@ -93,31 +118,27 @@ button {
   margin-top: 20px;
 }
 
-.teachers {
-  padding: 0px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  .teacher {
-    margin: 10px 0px;
-  }
-}
-
 .timetable {
   @extend %black-border;
   border-collapse: collapse;
-  flex-grow: 2;
-  min-height: 80vh;
-  width: 80%;
+  table-layout: fixed !important;
+  width: 100%;
 
-  th,
-  td {
-    @extend %black-border;
+  .tr {
+    display: flex;
+    height: 9vh;
   }
 
-  td {
-    height: 11vh;
+  .th {
+    @extend %black-border;
+    // To center the text
+    display: grid;
+    text-align: center;
+    align-items: center;
+  }
+
+  .td {
+    @extend %black-border;
     font-size: 14px;
   }
 }
