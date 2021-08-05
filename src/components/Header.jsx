@@ -1,12 +1,9 @@
 import { ReactComponent as Cross } from "../assets/CrossVector.svg";
-import { ReactComponent as Tick } from "../assets/TickVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
+import { drag } from "../utils";
 
-// /* eslint no-unused-vars: "off" */
 const Header = ({
-  selectedComponents,
-  onComponentSelect,
   subjects,
   onDelete,
   currentSem,
@@ -42,25 +39,16 @@ const Header = ({
 
       <div className="subjects">
         {subjects[currentSem].map(subject => {
-          const isSelected = selectedComponents.subject === subject;
           return (
             <Button
-              className={`button subject ${isSelected ? "selected" : ""}`}
+              className="button subject"
               key={subject}
               name={subject}
               text={subject}
-              onClick={() => onComponentSelect(subject, "subject")}
+              draggable
+              onDragStart={drag}
             >
-              {isSelected ? (
-                <Tick />
-              ) : (
-                <Cross
-                  onClick={e => {
-                    e.stopPropagation();
-                    onDelete(subject);
-                  }}
-                />
-              )}
+              <Cross onClick={() => onDelete(subject, "subject")} />
             </Button>
           );
         })}

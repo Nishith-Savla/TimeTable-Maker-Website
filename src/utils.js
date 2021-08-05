@@ -65,4 +65,15 @@ const teachers = [
 
 const columnWidths = [13.33, 13.33, 13.33, 5, 13.33, 13.33, 1.67, 13.33, 13.33];
 
-export { subjects, teachers, columnWidths };
+const allowDrop = ev => ev.preventDefault();
+
+const drag = ev => ev.dataTransfer.setData("text", ev.target.id);
+
+const drop = ev => {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  // eslint-disable-next-line no-param-reassign
+  ev.target.innerText += `${document.getElementById(data).innerText}\n`;
+};
+
+export { subjects, teachers, columnWidths, allowDrop, drag, drop };

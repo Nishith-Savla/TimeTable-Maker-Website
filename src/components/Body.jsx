@@ -1,10 +1,9 @@
 import Table from "../common/Table";
-import { teachers } from "../utils";
 import { ReactComponent as Cross } from "../assets/CrossVector.svg";
-import { ReactComponent as Tick } from "../assets/TickVector.svg";
 import Button from "../common/Button";
+import { drag, allowDrop, drop } from "../utils";
 
-const Body = ({ selectedComponents, onComponentSelect }) => {
+const Body = ({ teachers, onDelete }) => {
   return (
     <div className="app-body">
       <Table
@@ -28,23 +27,26 @@ const Body = ({ selectedComponents, onComponentSelect }) => {
           "Friday",
           "Saturday",
         ]}
+        onDrop={drop}
+        onDragOver={allowDrop}
       />
 
       <div className="teachers">
         {teachers.map(teacher => {
-          const isSelected = selectedComponents.teacher === teacher;
           return (
             <Button
-              className={`button teacher ${isSelected ? "selected" : ""}`}
+              className="button teacher"
               key={teacher}
               name={teacher}
               text={teacher}
-              onClick={() => onComponentSelect(teacher, "teacher")}
+              draggable
+              onDragStart={drag}
             >
-              {isSelected ? <Tick /> : <Cross />}
+              <Cross onClick={() => onDelete(teacher, "teacher")} />
             </Button>
           );
         })}
+        ;
       </div>
     </div>
   );

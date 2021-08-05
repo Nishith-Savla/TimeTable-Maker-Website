@@ -1,6 +1,15 @@
 import React from "react";
 
-const Button = ({ isActive, name, children, className, text, onClick }) => {
+const Button = ({
+  isActive,
+  draggable,
+  name,
+  children,
+  className,
+  text,
+  onClick,
+  onDragStart,
+}) => {
   return (
     <button
       className={`${className} ${isActive ? "active" : ""}`}
@@ -8,6 +17,8 @@ const Button = ({ isActive, name, children, className, text, onClick }) => {
       name={name}
       id={name}
       onClick={onClick}
+      draggable={draggable}
+      onDragStart={onDragStart}
     >
       {text} {children}
     </button>

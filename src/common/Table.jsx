@@ -1,6 +1,6 @@
 import { columnWidths } from "../utils";
 
-const Table = ({ className, columns, rows }) => {
+const Table = ({ className, columns, rows, onDrop, onDragOver }) => {
   return (
     <table className={className}>
       <thead>
@@ -17,7 +17,12 @@ const Table = ({ className, columns, rows }) => {
           <tr>
             <th width={`${columnWidths[0]}%`}>{row}</th>
             {[...Array(columns.length - 1)].map((td, index) => (
-              <td key={td} width={`${columnWidths[index + 1]}%`} />
+              <td
+                onDrop={onDrop}
+                onDragOver={onDragOver}
+                key={td}
+                width={`${columnWidths[index + 1]}%`}
+              />
             ))}
           </tr>
         ))}
