@@ -1,6 +1,13 @@
 import { columnWidths } from "../utils";
 
-const Table = ({ className, columns, rows, onDrop, onDragOver }) => {
+const Table = ({
+  className,
+  columns,
+  rows,
+  onDrop,
+  onDragOver,
+  contentEditable,
+}) => {
   return (
     <div className={className}>
       <div className="tr">
@@ -22,15 +29,20 @@ const Table = ({ className, columns, rows, onDrop, onDragOver }) => {
             <span className="th" style={{ width: `${columnWidths[0]}%` }}>
               {row}
             </span>
-            {[...Array(columns.length - 1)].map((td, index) => (
-              <span
-                className="td"
-                onDrop={onDrop}
-                onDragOver={onDragOver}
-                key={td}
-                style={{ width: `${columnWidths[index + 1]}%` }}
-              />
-            ))}
+            {columns.slice(1).map((column, index) => {
+              const isBreak = column.endsWith("Break");
+              return (
+                <span
+                  id={isBreak ? "break" : `${column} ${row}`}
+                  contentEditable={isBreak ? false : contentEditable}
+                  className="td"
+                  onDrop={isBreak ? null : onDrop}
+                  onDragOver={isBreak ? null : onDragOver}
+                  key={`${column} ${row}`}
+                  style={{ width: `${columnWidths[index + 1]}%` }}
+                />
+              );
+            })}
             <br />
           </div>
         );

@@ -1,7 +1,7 @@
 import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
-import { drag } from "../utils";
+import { batches, drag } from "../utils";
 
 const Header = ({
   subjects,
@@ -70,6 +70,19 @@ const Header = ({
             </Button>
           );
         })}
+      </div>
+
+      <div className="batches">
+        {batches.map(batch => (
+          <Button
+            className="button batch"
+            key={batch}
+            name={batch}
+            text={batch}
+            draggable
+            onDragStart={drag}
+          />
+        ))}
       </div>
     </div>
   );

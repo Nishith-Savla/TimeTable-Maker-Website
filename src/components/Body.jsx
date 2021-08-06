@@ -27,6 +27,7 @@ const Body = () => {
         ]}
         onDrop={drop}
         onDragOver={allowDrop}
+        contentEditable
       />
     </div>
   );
