@@ -63,7 +63,7 @@ const teachers = [
   "Snehal Suryavanshi",
 ];
 
-const batches = ["C1: ", "C2: ", "C3: "];
+const batches = ["C1:\xa0", "C2:\xa0", "C3:\xa0"];
 
 const columnWidths = [8, 14, 14, 4, 14, 14, 4, 14, 14];
 
@@ -76,7 +76,8 @@ const drop = ev => {
   const data = document.getElementById(ev.dataTransfer.getData("text"));
   // eslint-disable-next-line no-param-reassign
   ev.target.innerText += `${data.innerText}${
-    ev.target.innerText.startsWith("C") && data.classList.contains("subject")
+    ev.target.innerText.startsWith("C") &&
+    (data.classList.contains("subject") || data.classList.contains("batch"))
       ? "\xa0"
       : "\n"
   }`;

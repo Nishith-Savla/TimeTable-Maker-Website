@@ -1,7 +1,7 @@
 import Table from "../common/DivSpanTable";
 import { allowDrop, drop } from "../utils";
 
-const Body = () => {
+const Body = ({ currentSem, table, onTableSet }) => {
   return (
     <div className="app-body">
       <Table
@@ -28,6 +28,8 @@ const Body = () => {
         onDrop={drop}
         onDragOver={allowDrop}
         contentEditable
+        onChange={onTableSet}
+        state={table[currentSem]}
       />
     </div>
   );

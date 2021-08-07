@@ -1,5 +1,10 @@
 import { columnWidths } from "../utils";
 
+const placeCursorAtEnd = () => {
+  document.execCommand("selectAll", false, null);
+  document.getSelection().collapseToEnd();
+};
+
 const Table = ({
   className,
   columns,
@@ -7,6 +12,8 @@ const Table = ({
   onDrop,
   onDragOver,
   contentEditable,
+  onChange,
+  state,
 }) => {
   return (
     <div className={className}>
@@ -36,11 +43,35 @@ const Table = ({
                   id={isBreak ? "break" : `${column} ${row}`}
                   contentEditable={isBreak ? false : contentEditable}
                   className="td"
-                  onDrop={isBreak ? null : onDrop}
-                  onDragOver={isBreak ? null : onDragOver}
+                  onDrop={
+                    isBreak
+                      ? null
+                      : e => {
+                          onDrop(e);
+                          onChange(e);
+                        }
+                  }
+                  onDragOver={
+                    isBreak
+                      ? null
+                      : e => {
+                          onDragOver(e);
+                        }
+                  }
                   key={`${column} ${row}`}
                   style={{ width: `${columnWidths[index + 1]}%` }}
-                />
+                  suppressContentEditableWarning
+                  onInput={e => {
+                    onChange(e);
+                    placeCursorAtEnd();
+                  }}
+                >
+                  {
+                    state.filter(
+                      cell => cell.day === row && cell.time === column
+                    )[0]?.data
+                  }
+                </span>
               );
             })}
             <br />
