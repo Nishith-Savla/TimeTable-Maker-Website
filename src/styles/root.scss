@@ -40,7 +40,7 @@ body {
 }
 
 .app-header {
-  height: 33vh;
+  min-height: 33vh;
 }
 
 .app-body {
@@ -158,5 +158,6 @@ button {
   .td {
     font-size: 14px;
     hyphens: auto;
+    white-space: pre;
   }
 }

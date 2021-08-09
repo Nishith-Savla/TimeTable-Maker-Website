@@ -22,7 +22,6 @@ function App() {
     6: [],
   });
   const sems = [1, 2, 3, 4, 5, 6];
-  let index = -1;
   let filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
 
   const deleteElement = (element, type) =>
@@ -54,7 +53,7 @@ function App() {
       day,
       data,
     };
-    index = table[currentSem].findIndex(
+    const index = table[currentSem].findIndex(
       cell => cell.time === time && cell.day === day
     );
 

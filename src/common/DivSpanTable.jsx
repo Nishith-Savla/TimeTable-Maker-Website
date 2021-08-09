@@ -27,9 +27,9 @@ const Table = ({
             {column}
           </span>
         ))}
-
         <br />
       </div>
+
       {rows.map(row => {
         return (
           <div className="tr">
@@ -51,13 +51,7 @@ const Table = ({
                           onChange(e);
                         }
                   }
-                  onDragOver={
-                    isBreak
-                      ? null
-                      : e => {
-                          onDragOver(e);
-                        }
-                  }
+                  onDragOver={isBreak ? null : e => onDragOver(e)}
                   key={`${column} ${row}`}
                   style={{ width: `${columnWidths[index + 1]}%` }}
                   suppressContentEditableWarning
