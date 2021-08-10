@@ -95,9 +95,11 @@ const allowDrop = ev => ev.preventDefault();
 
 const drag = ev => ev.dataTransfer.setData("text", ev.target.id);
 
-const drop = ev => {
+const drop = (ev, callback) => {
   ev.preventDefault();
   const data = document.getElementById(ev.dataTransfer.getData("text"));
+
+  const prevText = ev.target.innerText;
   ev.target.innerText += `${data.innerText}${
     (/^[CM][1-3]/.test(ev.target.innerText) ||
       /^[CM][1-3]/.test(data.innerText)) &&
@@ -105,6 +107,9 @@ const drop = ev => {
       ? "\xa0"
       : "\n"
   }`;
+
+  // ev.target.innerText = !callback(ev) ? prevText : "";
+  if (!callback(ev, data.innerText)) ev.target.innerText = prevText;
 };
 
 export {

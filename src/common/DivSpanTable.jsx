@@ -47,8 +47,7 @@ const Table = ({
                     isBreak
                       ? null
                       : e => {
-                          onDrop(e);
-                          onChange(e);
+                          onDrop(e, onChange);
                         }
                   }
                   onDragOver={isBreak ? null : e => onDragOver(e)}
@@ -63,7 +62,7 @@ const Table = ({
                   {
                     state.filter(
                       cell => cell.day === row && cell.time === column
-                    )[0]?.data
+                    )[0]?.text
                   }
                 </span>
               );
