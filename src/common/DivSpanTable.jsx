@@ -27,9 +27,9 @@ const Table = ({
             {column}
           </span>
         ))}
-
         <br />
       </div>
+
       {rows.map(row => {
         return (
           <div className="tr">
@@ -47,17 +47,10 @@ const Table = ({
                     isBreak
                       ? null
                       : e => {
-                          onDrop(e);
-                          onChange(e);
+                          onDrop(e, onChange);
                         }
                   }
-                  onDragOver={
-                    isBreak
-                      ? null
-                      : e => {
-                          onDragOver(e);
-                        }
-                  }
+                  onDragOver={isBreak ? null : e => onDragOver(e)}
                   key={`${column} ${row}`}
                   style={{ width: `${columnWidths[index + 1]}%` }}
                   suppressContentEditableWarning
@@ -69,7 +62,7 @@ const Table = ({
                   {
                     state.filter(
                       cell => cell.day === row && cell.time === column
-                    )[0]?.data
+                    )[0]?.text
                   }
                 </span>
               );

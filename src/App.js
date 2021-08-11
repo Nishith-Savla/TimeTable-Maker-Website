@@ -20,8 +20,8 @@ function App() {
     5: [],
     6: [],
   });
+
   const sems = [1, 2, 3, 4, 5, 6];
-  let index = -1;
   let filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
 
   const deleteElement = (element, type) =>
@@ -64,38 +64,59 @@ function App() {
     setCurrentSem(sem);
   };
 
-  const handleTableSet = e => {
+  const doesClash = (time, day, text) => {
+    const filteredSlots = [];
+    filteredSems
+      .filter(sem => sem !== currentSem)
+      .forEach(sem => {
+        filteredSlots.push(
+          table[sem].filter(cell => cell.day === day && cell.time === time)[0]
+        );
+      });
+    // return filteredSlots.some(slot => slot && text.includes(slot?.text));
+    return filteredSlots.some(slot =>
+      slot?.draggedTexts.some(draggedText => text.includes(draggedText))
+    );
+  };
+
+  const handleTableSet = (e, draggedText = "") => {
     const time = e.target.id.split(" ").slice(0, -1).join(" ");
     const day = e.target.id.split(" ").slice(-1)[0];
-    const data = e.target.innerText;
-    const current = {
-      time,
-      day,
-      data,
-    };
-    index = table[currentSem].findIndex(
-      cell => cell.time === time && cell.day === day
-    );
+    const text = e.target.innerText || "";
+    if (!doesClash(time, day, text)) {
+      const index = table[currentSem].findIndex(
+        cell => cell.time === time && cell.day === day
+      );
 
-    setTable(prevTable => ({
-      ...prevTable,
-      [currentSem]:
-        index === -1
-          ? prevTable[currentSem].concat([current])
-          : [
-              ...prevTable[currentSem].slice(0, index),
-              { ...prevTable[currentSem][index], ...current },
-              ...prevTable[currentSem].slice(index + 1),
-            ],
-    }));
+      const current = {
+        time,
+        day,
+        text,
+        draggedTexts: table[currentSem][index]?.draggedTexts || [],
+      };
+      current.draggedTexts.push(draggedText.trim());
+
+      setTable(prevTable => ({
+        ...prevTable,
+        [currentSem]:
+          index === -1
+            ? prevTable[currentSem].concat([current])
+            : [
+                ...prevTable[currentSem].slice(0, index),
+                { ...prevTable[currentSem][index], ...current },
+                ...prevTable[currentSem].slice(index + 1),
+              ],
+      }));
+      return true;
+    }
+    alert(`A clash may happen if you add ${text.trim()} at ${time} on ${day}.`);
+    return false;
   };
 
   // Change sems on term change
   useEffect(() => {
-    // console.debug(isOddTerm);
     filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
     setCurrentSem(filteredSems[0]);
-    // console.log(buttons);
   }, [isOddTerm]);
 
   return (
