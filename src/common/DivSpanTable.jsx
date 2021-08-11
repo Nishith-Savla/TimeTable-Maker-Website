@@ -43,13 +43,7 @@ const Table = ({
                   id={isBreak ? "break" : `${column} ${row}`}
                   contentEditable={isBreak ? false : contentEditable}
                   className="td"
-                  onDrop={
-                    isBreak
-                      ? null
-                      : e => {
-                          onDrop(e, onChange);
-                        }
-                  }
+                  onDrop={isBreak ? null : e => onDrop(e, onChange)}
                   onDragOver={isBreak ? null : e => onDragOver(e)}
                   key={`${column} ${row}`}
                   style={{ width: `${columnWidths[index + 1]}%` }}

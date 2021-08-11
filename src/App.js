@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import Body from "./components/Body";
 import Header from "./components/Header";
 import {
@@ -75,7 +76,10 @@ function App() {
       });
     // return filteredSlots.some(slot => slot && text.includes(slot?.text));
     return filteredSlots.some(slot =>
-      slot?.draggedTexts.some(draggedText => text.includes(draggedText))
+      slot?.draggedTexts.some(
+        draggedText =>
+          !/^[CM][1-3]:/.test(draggedText) && text.includes(draggedText)
+      )
     );
   };
 
@@ -109,7 +113,11 @@ function App() {
       }));
       return true;
     }
-    alert(`A clash may happen if you add ${text.trim()} at ${time} on ${day}.`);
+    Swal.fire({
+      title: "Clash alert",
+      text: `A clash may happen if you add ${text.trim()} at ${time} on ${day}.`,
+      icon: "error",
+    });
     return false;
   };
 
