@@ -8,6 +8,7 @@ const Button = ({
   className,
   text,
   onClick,
+  onKeyUp,
   onDragStart,
 }) => {
   return (
@@ -19,6 +20,7 @@ const Button = ({
       onClick={onClick}
       draggable={draggable}
       onDragStart={onDragStart}
+      onKeyUp={onKeyUp}
     >
       {text} {children}
     </button>

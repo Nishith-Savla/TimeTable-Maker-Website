@@ -5,7 +5,6 @@ import {
   subjects as defaultSubjects,
   teachers as defaultTeachers,
 } from "./utils";
-
 import "./styles/root.scss";
 
 function App() {
@@ -36,6 +35,26 @@ function App() {
       : setTeachers(prevTeachers =>
           prevTeachers.filter(currentTeacher => currentTeacher !== element)
         );
+
+  const handleKeyPress = (e, type) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      // eslint-disable-next-line no-unused-expressions
+      type === "subject"
+        ? setSubjects(prevSubjects => ({
+            ...prevSubjects,
+            [currentSem]: [...prevSubjects[currentSem], e.target.innerText],
+          }))
+        : setTeachers(prevTeachers => [...prevTeachers, e.target.innerText]);
+    }
+  };
+
+  const handleAddButtonClick = e => {
+    e.preventDefault();
+    e.target.contentEditable = true;
+    // e.target.innerText = "\xa0";
+    e.target.focus();
+  };
 
   const handleTermChange = () => {
     setIsOddTerm(prev => !prev);
@@ -89,6 +108,8 @@ function App() {
         onSemChange={handleSemChange}
         filteredSems={filteredSems}
         teachers={teachers}
+        onAddButtonClick={handleAddButtonClick}
+        onKeyUp={handleKeyPress}
       />
       <Body currentSem={currentSem} table={table} onTableSet={handleTableSet} />
     </>

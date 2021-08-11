@@ -11,6 +11,8 @@ const Header = ({
   onSemChange,
   onTermChange,
   filteredSems,
+  onAddButtonClick,
+  onKeyUp,
 }) => {
   return (
     <div className="app-header">
@@ -53,6 +55,12 @@ const Header = ({
             </Button>
           );
         })}
+        <Button
+          className="button add-subject subject"
+          text="+"
+          onClick={onAddButtonClick}
+          onKeyUp={e => onKeyUp(e, "subject")}
+        />
       </div>
 
       <div className="teachers">
@@ -70,6 +78,12 @@ const Header = ({
             </Button>
           );
         })}
+        <Button
+          className="button add-teacher teacher"
+          text="+"
+          onClick={onAddButtonClick}
+          onKeyUp={e => onKeyUp(e, "teacher")}
+        />
       </div>
 
       <div className="batches">
