@@ -114,11 +114,32 @@ function App() {
       return true;
     }
     Swal.fire({
-      title: "Clash alert",
+      title: "Clash Alert",
       text: `A clash may happen if you add ${text.trim()} at ${time} on ${day}.`,
       icon: "error",
     });
     return false;
+  };
+
+  const downloadPDF = () => {
+    // Importing jspdf only when needed
+    import("jspdf/dist/jspdf.es").then(module => {
+      const jsPDF = module.default;
+      // eslint-disable-next-line import/extensions
+      import("dom-to-image/dist/dom-to-image.min.js").then(domToImageModule => {
+        const DomToImage = domToImageModule.default;
+        DomToImage.toPng(document.querySelector(".timetable")).then(dataURL => {
+          // eslint-disable-next-line new-cap
+          const doc = new jsPDF("landscape");
+          doc.setFontSize(40);
+          doc.text(`Timetable for sem ${currentSem}`, 85, 20, {
+            align: "left",
+          });
+          doc.addImage(dataURL, 3, 30, 290, 100);
+          doc.save(`kjsp-timetable-sem${currentSem}.pdf`);
+        });
+      });
+    });
   };
 
   // Change sems on term change
@@ -139,6 +160,7 @@ function App() {
         teachers={teachers}
         onAddButtonClick={handleAddButtonClick}
         onKeyUp={handleKeyPress}
+        onDownload={downloadPDF}
       />
       <Body currentSem={currentSem} table={table} onTableSet={handleTableSet} />
     </>

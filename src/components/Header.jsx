@@ -1,6 +1,7 @@
-import { ReactComponent as Cross } from "../assets/CrossVector.svg";
 import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
+import { ReactComponent as Cross } from "../assets/Cross.svg";
+import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
 import { batches, drag } from "../utils";
 
 const Header = ({
@@ -13,6 +14,7 @@ const Header = ({
   filteredSems,
   onAddButtonClick,
   onKeyUp,
+  onDownload,
 }) => {
   return (
     <div className="app-header">
@@ -38,6 +40,14 @@ const Header = ({
             />
           ))}
         </div>
+        <Button
+          className="button download"
+          text="Download"
+          name="download"
+          onClick={onDownload}
+        >
+          <FileDownload />
+        </Button>
       </div>
 
       <div className="subjects">
