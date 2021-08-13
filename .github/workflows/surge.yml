@@ -1,29 +1,28 @@
-name: Build website and publish it to surge.
+name: Deploy
 
-on: push
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu latest
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm run build --if-present
-        
-  publish:
-    name: Publish to surge.sh
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to timetable-maker.surge.sh
-        uses: dswistowski/surge-sh-action@v1
-        with:
-          domain: 'https://timetable-maker.surge.sh'
-          project: 'build'
-          token: ${{ secrets.surge_token }}
+    - uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+          node-version: 16
+
+    - name: Build React App
+      run: |
+        npm install # Install Dependencies
+        CI=false npm run build # CI=false to ignore warnings
+
+    - name: Install Surge
+      run: npm install -g surge
+
+    - name: Deploy to Surge
+      run:  surge ./build https://timetable-maker.surge.sh/ --token ${{secrets.TOKEN}}
