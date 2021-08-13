@@ -125,6 +125,7 @@ function App() {
     // Importing jspdf only when needed
     import("jspdf/dist/jspdf.es").then(module => {
       const jsPDF = module.default;
+      // Importing dom-to-image only when needed
       // eslint-disable-next-line import/extensions
       import("dom-to-image/dist/dom-to-image.min.js").then(domToImageModule => {
         const DomToImage = domToImageModule.default;
