@@ -47,7 +47,8 @@ body {
 }
 
 .app-header {
-  min-height: 33vh;
+  height: 40vh;
+  overflow: auto;
 }
 
 .app-body {
@@ -61,10 +62,16 @@ button {
   font-size: 1rem;
 }
 
-.sem-select {
+.params-select {
   display: flex;
   justify-content: space-evenly;
   margin: 10px unquote("min(20px, 5%)");
+
+  .dropdowns {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+  }
 
   .dropdown {
     border: none;
@@ -72,10 +79,15 @@ button {
     background: transparent;
   }
 
+  .term-changer,
+  .year-changer {
+    padding: 5px 15px 5px 5px;
+  }
+
   .sems {
-    @extend %display-flex-wrap;
-    width: 100%;
+    display: flex;
     justify-content: space-evenly;
+    width: 100%;
 
     .sem {
       background: $grey;
@@ -111,7 +123,7 @@ button {
   .subject,
   .teacher,
   .batch {
-    margin: 5px 10px;
+    margin: 5px 15px;
   }
 }
 
@@ -157,7 +169,7 @@ button {
 
   .tr {
     display: flex;
-    height: 9vh;
+    height: 8vh;
   }
 
   .th {

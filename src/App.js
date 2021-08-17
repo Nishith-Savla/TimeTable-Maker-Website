@@ -1,29 +1,68 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Swal from "sweetalert2";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import {
-  subjects as defaultSubjects,
-  teachers as defaultTeachers,
-} from "./utils";
+import { departments } from "./utils";
 import "./styles/root.scss";
 
 function App() {
-  const [subjects, setSubjects] = useState(defaultSubjects);
-  const [teachers, setTeachers] = useState(defaultTeachers);
+  const [currentDepartment, setCurrentDepartment] = useState("computer");
+  const [subjects, setSubjects] = useState(
+    departments[currentDepartment].subjects
+  );
+  const [teachers, setTeachers] = useState(
+    departments[currentDepartment].teachers
+  );
   const [isOddTerm, setIsOddTerm] = useState(true);
   const [currentSem, setCurrentSem] = useState(1);
   const [table, setTable] = useState({
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
+    computer: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    },
+    electrical: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    },
+    industrial: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    },
+    mechanical: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    },
+    civil: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    },
   });
 
   const sems = [1, 2, 3, 4, 5, 6];
-  let filteredSems = sems.filter(sem => sem % 2 === Number(isOddTerm));
+  let filteredSems = useMemo(
+    () => sems.filter(sem => sem % 2 === Number(isOddTerm)),
+    [isOddTerm]
+  );
 
   const deleteElement = (element, type) =>
     type === "subject"
@@ -57,13 +96,20 @@ function App() {
     e.target.focus();
   };
 
-  const handleTermChange = () => {
-    setIsOddTerm(prev => !prev);
-  };
+  const handleTermChange = () => setIsOddTerm(prev => !prev);
 
   const handleSemChange = sem => {
     setCurrentSem(sem);
   };
+
+  const handleDepartmentChange = e => {
+    setCurrentDepartment(e.target.value);
+  };
+
+  useEffect(() => {
+    setSubjects(departments[currentDepartment]?.subjects);
+    setTeachers(departments[currentDepartment]?.teachers);
+  }, [currentDepartment]);
 
   const doesClash = (time, day, text) => {
     const filteredSlots = [];
@@ -71,7 +117,9 @@ function App() {
       .filter(sem => sem !== currentSem)
       .forEach(sem => {
         filteredSlots.push(
-          table[sem].filter(cell => cell.day === day && cell.time === time)[0]
+          table[currentDepartment][sem].filter(
+            cell => cell.day === day && cell.time === time
+          )[0]
         );
       });
     // return filteredSlots.some(slot => slot && text.includes(slot?.text));
@@ -87,29 +135,36 @@ function App() {
     const time = e.target.id.split(" ").slice(0, -1).join(" ");
     const day = e.target.id.split(" ").slice(-1)[0];
     const text = e.target.innerText || "";
+
     if (!doesClash(time, day, text)) {
-      const index = table[currentSem].findIndex(
+      const index = table[currentDepartment][currentSem].findIndex(
         cell => cell.time === time && cell.day === day
       );
-
       const current = {
         time,
         day,
         text,
-        draggedTexts: table[currentSem][index]?.draggedTexts || [],
+        draggedTexts:
+          table[currentDepartment][currentSem][index]?.draggedTexts || [],
       };
       current.draggedTexts.push(draggedText.trim());
 
       setTable(prevTable => ({
         ...prevTable,
-        [currentSem]:
-          index === -1
-            ? prevTable[currentSem].concat([current])
-            : [
-                ...prevTable[currentSem].slice(0, index),
-                { ...prevTable[currentSem][index], ...current },
-                ...prevTable[currentSem].slice(index + 1),
-              ],
+        [currentDepartment]: {
+          ...prevTable[currentDepartment],
+          [currentSem]:
+            index === -1
+              ? prevTable[currentDepartment][currentSem].concat([current])
+              : [
+                  ...prevTable[currentDepartment][currentSem].slice(0, index),
+                  {
+                    ...prevTable[currentDepartment][currentSem][index],
+                    ...current,
+                  },
+                  ...prevTable[currentDepartment][currentSem].slice(index + 1),
+                ],
+        },
       }));
       return true;
     }
@@ -154,6 +209,7 @@ function App() {
       <Header
         subjects={subjects}
         onDelete={deleteElement}
+        onDepartmentChange={handleDepartmentChange}
         currentSem={currentSem}
         onTermChange={handleTermChange}
         onSemChange={handleSemChange}
@@ -163,7 +219,11 @@ function App() {
         onKeyUp={handleKeyPress}
         onDownload={downloadPDF}
       />
-      <Body currentSem={currentSem} table={table} onTableSet={handleTableSet} />
+      <Body
+        currentSem={currentSem}
+        table={table[currentDepartment]}
+        onTableSet={handleTableSet}
+      />
     </>
   );
 }

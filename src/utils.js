@@ -1,5 +1,5 @@
-const dept = {
-  Computer: {
+const departments = {
+  computer: {
     subjects: {
       1: [
         "Basic Mathematics (05)",
@@ -64,7 +64,7 @@ const dept = {
       "Snehal Suryavanshi",
     ],
   },
-  Electrical: {
+  electrical: {
     subjects: {
       1: [
         "Basic Mathematics (05)",
@@ -131,7 +131,7 @@ const dept = {
       "Mrs.Anchal Lalla",
     ],
   },
-  Industrial: {
+  industrial: {
     subjects: {
       1: [
         "Basic Mathematics (05)",
@@ -193,7 +193,7 @@ const dept = {
       "Mrs.Sunita Kolekar",
     ],
   },
-  Mechanical: {
+  mechanical: {
     subjects: {
       1: [
         "Basic Mathematics (05)",
@@ -260,12 +260,12 @@ const dept = {
       "Mr. SB Kasar",
     ],
   },
-  Civil: {
+  civil: {
     subjects: {
       1: [
         "Communication Skills (04)",
         "Physics-I (04)",
-        "Basic Maths",
+        "Basic Maths (05)",
         "CEP-I (Phy-Chem) (04)",
         "CEP-II CAD (06)",
       ],
@@ -374,7 +374,7 @@ const drop = (ev, callback) => {
 };
 
 export {
-  dept,
+  departments,
   batches,
   columnWidths,
   placeCursorAtPosition,

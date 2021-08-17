@@ -3,6 +3,7 @@ import Button from "../common/Button";
 import { ReactComponent as Cross } from "../assets/Cross.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
 import { batches, drag } from "../utils";
+import YearPicker from "../common/YearPicker";
 
 const Header = ({
   subjects,
@@ -15,6 +16,7 @@ const Header = ({
   onAddButtonClick,
   onKeyUp,
   onDownload,
+  onDepartmentChange,
 }) => {
   const isMobile = () => {
     let result = false;
@@ -37,16 +39,35 @@ const Header = ({
       {isMobile() && (
         <p>Note: This website works better on desktop/laptop browsers.</p>
       )}
-      <div className="sem-select">
-        <Dropdown
-          name="term"
-          className="dropdown"
-          options={[
-            { value: "odd", label: "Odd" },
-            { value: "even", label: "Even" },
-          ]}
-          onChange={onTermChange}
-        />
+      <div className="params-select">
+        <div className="dropdowns">
+          <Dropdown
+            name="department"
+            className="dropdown dept-changer"
+            options={[
+              { value: "computer", label: "Computer" },
+              { value: "electrical", label: "Electrical" },
+              { value: "industrial", label: "Industrial Electronics" },
+              { value: "mechanical", label: "Mechanical" },
+              { value: "civil", label: "Civil" },
+            ]}
+            onChange={onDepartmentChange}
+          />
+          <YearPicker
+            className="dropdown year-changer"
+            start={new Date().getFullYear()}
+            end={new Date().getFullYear() + 2}
+          />
+          <Dropdown
+            name="term"
+            className="dropdown term-changer"
+            options={[
+              { value: "odd", label: "Odd" },
+              { value: "even", label: "Even" },
+            ]}
+            onChange={onTermChange}
+          />
+        </div>
         <div className="sems">
           {filteredSems.map(sem => (
             <Button
