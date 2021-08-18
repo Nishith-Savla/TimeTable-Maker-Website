@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import Swal from "sweetalert2";
 import Body from "./components/Body";
 import Header from "./components/Header";
 import { departments } from "./utils";
@@ -168,34 +167,45 @@ function App() {
       }));
       return true;
     }
-    Swal.fire({
-      title: "Clash Alert",
-      text: `A clash may happen if you add ${text.trim()} at ${time} on ${day}.`,
-      icon: "error",
-    });
+
+    const alertMsg = `A clash may happen if you add ${text.trim()} at ${time} on ${day}.`;
+    import("sweetalert2")
+      .then(module => {
+        const Swal = module.default;
+        Swal.fire({
+          title: "Clash Alert",
+          text: alertMsg,
+          icon: "error",
+        });
+      })
+      .catch(alert(alertMsg));
     return false;
   };
 
   const downloadPDF = () => {
     // Importing jspdf only when needed
-    import("jspdf/dist/jspdf.es").then(module => {
-      const jsPDF = module.default;
-      // Importing dom-to-image only when needed
-      // eslint-disable-next-line import/extensions
-      import("dom-to-image/dist/dom-to-image.min.js").then(domToImageModule => {
-        const DomToImage = domToImageModule.default;
-        DomToImage.toPng(document.querySelector(".timetable")).then(dataURL => {
-          // eslint-disable-next-line new-cap
-          const doc = new jsPDF("landscape");
-          doc.setFontSize(40);
-          doc.text(`Timetable for sem ${currentSem}`, 85, 20, {
-            align: "left",
-          });
-          doc.addImage(dataURL, 3, 30, 290, 100);
-          doc.save(`kjsp-timetable-sem${currentSem}.pdf`);
-        });
-      });
-    });
+    import("jspdf")
+      .then(module => {
+        const jsPDF = module.default;
+        import("dom-to-image")
+          .then(domToImageModule => {
+            const DomToImage = domToImageModule.default;
+            DomToImage.toPng(document.querySelector(".timetable")).then(
+              dataURL => {
+                // eslint-disable-next-line new-cap
+                const doc = new jsPDF("landscape");
+                doc.setFontSize(40);
+                doc.text(`Timetable for sem ${currentSem}`, 85, 20, {
+                  align: "left",
+                });
+                doc.addImage(dataURL, 3, 30, 290, 100);
+                doc.save(`kjsp-timetable-sem${currentSem}.pdf`);
+              }
+            );
+          })
+          .catch(() => alert("Internet is required to download the PDF."));
+      })
+      .catch(() => alert("Internet is required to download the PDF."));
   };
 
   // Change sems on term change
