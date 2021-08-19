@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useReducer } from "react";
 import Body from "./components/Body";
 import Header from "./components/Header";
 import { departments } from "./utils";
@@ -13,7 +13,7 @@ function App() {
     departments[currentDepartment].teachers
   );
   const { batches } = departments[currentDepartment];
-  const [isOddTerm, setIsOddTerm] = useState(true);
+  const [isOddTerm, toggleIsOddTerm] = useReducer(state => !state, true);
   const [currentSem, setCurrentSem] = useState(1);
   const [table, setTable] = useState({
     computer: {
@@ -64,7 +64,7 @@ function App() {
     [isOddTerm]
   );
 
-  const deleteElement = (element, type) =>
+  const handleElementDelete = (element, type) =>
     type === "subject"
       ? setSubjects(prevSubjects => ({
           ...prevSubjects,
@@ -95,8 +95,6 @@ function App() {
     // e.target.innerText = "\xa0";
     e.target.focus();
   };
-
-  const handleTermChange = () => setIsOddTerm(prev => !prev);
 
   const handleSemChange = sem => {
     setCurrentSem(sem);
@@ -224,9 +222,9 @@ function App() {
         subjects={subjects}
         teachers={teachers}
         batches={batches}
-        onDelete={deleteElement}
+        onDelete={handleElementDelete}
         currentSem={currentSem}
-        onTermChange={handleTermChange}
+        onTermChange={toggleIsOddTerm}
         onSemChange={handleSemChange}
         filteredSems={filteredSems}
         onAddButtonClick={handleAddButtonClick}
