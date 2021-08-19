@@ -113,20 +113,21 @@ function App() {
 
   const doesClash = (time, day, text) => {
     const filteredSlots = [];
-    filteredSems
-      .filter(sem => sem !== currentSem)
-      .forEach(sem => {
-        filteredSlots.push(
-          table[currentDepartment][sem].filter(
-            cell => cell.day === day && cell.time === time
-          )[0]
-        );
-      });
-    // return filteredSlots.some(slot => slot && text.includes(slot?.text));
+    Object.keys(departments).forEach(department => {
+      filteredSems
+        .filter(sem => sem !== currentSem || department !== currentDepartment)
+        .forEach(sem => {
+          filteredSlots.push(
+            table[department][sem].filter(
+              cell => cell.day === day && cell.time === time
+            )[0]
+          );
+        });
+    });
     return filteredSlots.some(slot =>
       slot?.draggedTexts.some(
         draggedText =>
-          !/^[CM][1-3]:/.test(draggedText) && text.includes(draggedText)
+          teachers.includes(draggedText) && text.includes(draggedText)
       )
     );
   };
@@ -169,17 +170,19 @@ function App() {
       return true;
     }
 
+    let swalImported = false;
     const alertMsg = `A clash may happen if you add ${text.trim()} at ${time} on ${day}.`;
     import("sweetalert2")
       .then(module => {
         const Swal = module.default;
+        swalImported = true;
         Swal.fire({
           title: "Clash Alert",
           text: alertMsg,
           icon: "error",
         });
       })
-      .catch(alert(alertMsg));
+      .catch(swalImported && alert(alertMsg));
     return false;
   };
 
