@@ -363,8 +363,11 @@ const drop = (ev, callback) => {
   ev.preventDefault();
   const data = document.getElementById(ev.dataTransfer.getData("text"));
 
+  const text = data.classList.contains("subject")
+    ? data.innerText.split(" ").slice(0, -1).join(" ")
+    : data.innerText;
   const prevText = ev.target.innerText;
-  ev.target.innerText += `${data.innerText}${
+  ev.target.innerText += `${text}${
     (/^[CMEI]E?[1-3]/.test(ev.target.innerText) ||
       /^[CMEI]E?[1-3]/.test(data.innerText)) &&
     (data.classList.contains("subject") || data.classList.contains("batch"))
