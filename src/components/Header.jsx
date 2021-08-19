@@ -2,16 +2,17 @@ import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { ReactComponent as Cross } from "../assets/Cross.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
-import { batches, drag } from "../utils";
+import { drag } from "../utils";
 import YearPicker from "../common/YearPicker";
 
 const Header = ({
   subjects,
   teachers,
+  batches,
   onDelete,
   currentSem,
-  onSemChange,
   onTermChange,
+  onSemChange,
   filteredSems,
   onAddButtonClick,
   onKeyUp,

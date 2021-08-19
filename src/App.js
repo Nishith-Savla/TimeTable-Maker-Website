@@ -12,6 +12,7 @@ function App() {
   const [teachers, setTeachers] = useState(
     departments[currentDepartment].teachers
   );
+  const { batches } = departments[currentDepartment];
   const [isOddTerm, setIsOddTerm] = useState(true);
   const [currentSem, setCurrentSem] = useState(1);
   const [table, setTable] = useState({
@@ -199,7 +200,7 @@ function App() {
                   align: "left",
                 });
                 doc.addImage(dataURL, 3, 30, 290, 100);
-                doc.save(`kjsp-timetable-sem${currentSem}.pdf`);
+                doc.save(`kjsp-${currentDepartment}-tt-sem${currentSem}.pdf`);
               }
             );
           })
@@ -218,16 +219,17 @@ function App() {
     <>
       <Header
         subjects={subjects}
+        teachers={teachers}
+        batches={batches}
         onDelete={deleteElement}
-        onDepartmentChange={handleDepartmentChange}
         currentSem={currentSem}
         onTermChange={handleTermChange}
         onSemChange={handleSemChange}
         filteredSems={filteredSems}
-        teachers={teachers}
         onAddButtonClick={handleAddButtonClick}
         onKeyUp={handleKeyPress}
         onDownload={downloadPDF}
+        onDepartmentChange={handleDepartmentChange}
       />
       <Body
         currentSem={currentSem}

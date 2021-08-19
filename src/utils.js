@@ -365,8 +365,8 @@ const drop = (ev, callback) => {
 
   const prevText = ev.target.innerText;
   ev.target.innerText += `${data.innerText}${
-    (/^[CM][1-3]/.test(ev.target.innerText) ||
-      /^[CM][1-3]/.test(data.innerText)) &&
+    (/^[CMEI]E?[1-3]/.test(ev.target.innerText) ||
+      /^[CMEI]E?[1-3]/.test(data.innerText)) &&
     (data.classList.contains("subject") || data.classList.contains("batch"))
       ? "\xa0"
       : "\n"
