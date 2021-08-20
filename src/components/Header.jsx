@@ -2,7 +2,7 @@ import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { ReactComponent as Cross } from "../assets/Cross.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
-import { drag } from "../utils";
+import { departments, drag } from "../utils";
 import YearPicker from "../common/YearPicker";
 
 const Header = ({
@@ -46,13 +46,12 @@ const Header = ({
           <Dropdown
             name="department"
             className="dropdown dept-changer"
-            options={[
-              { value: "computer", label: "Computer" },
-              { value: "electrical", label: "Electrical" },
-              { value: "industrial", label: "Industrial Electronics" },
-              { value: "mechanical", label: "Mechanical" },
-              { value: "civil", label: "Civil" },
-            ]}
+            options={Object.keys(departments).map(departmentName => {
+              return {
+                value: departmentName,
+                label: departments[departmentName].label,
+              };
+            })}
             onChange={onDepartmentChange}
           />
           <YearPicker

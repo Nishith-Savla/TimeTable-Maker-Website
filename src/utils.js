@@ -1,5 +1,7 @@
 const departments = {
   computer: {
+    label: "Computer",
+    shortForm: "CO",
     subjects: {
       1: [
         "Basic Maths (05)",
@@ -66,6 +68,8 @@ const departments = {
     batches: ["C1:\xa0", "C2:\xa0", "C3:\xa0"],
   },
   electrical: {
+    label: "Electrical",
+    shortForm: "EE",
     subjects: {
       1: [
         "Basic Maths (05)",
@@ -134,6 +138,8 @@ const departments = {
     batches: ["E1:\xa0", "E2:\xa0", "E3:\xa0"],
   },
   industrial: {
+    label: "Industrial Electronics",
+    shortForm: "IE",
     subjects: {
       1: [
         "Basic Maths (05)",
@@ -197,6 +203,8 @@ const departments = {
     batches: ["IE1:\xa0", "IE2:\xa0", "IE3:\xa0"],
   },
   mechanical: {
+    label: "Mechanical",
+    shortForm: "ME",
     subjects: {
       1: [
         "Basic Maths (05)",
@@ -265,6 +273,8 @@ const departments = {
     batches: ["M1:\xa0", "M2:\xa0", "M3:\xa0"],
   },
   civil: {
+    label: "Civil",
+    shortForm: "CE",
     subjects: {
       1: [
         "Communication Skills (04)",

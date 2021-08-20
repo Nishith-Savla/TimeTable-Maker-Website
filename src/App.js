@@ -204,13 +204,18 @@ function App() {
                   130,
                   20
                 );
-                doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 125, 30);
-                doc.text(`Semester ${currentSem}`, 132, 40);
-                doc.addImage(dataURL, 3, 50, 290, 100);
+                doc.text(
+                  `${departments[currentDepartment].label} Engineering`,
+                  117,
+                  30
+                );
+                doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 130, 40);
+                doc.text(`Semester ${currentSem}`, 135, 50);
+                doc.addImage(dataURL, 3, 60, 290, 100);
                 doc.save(
-                  `${currentDepartment}-${isOddTerm ? "winter" : "summer"}${
-                    yearPickerRef.current
-                  }-sem${currentSem}-kjsp.pdf`
+                  `${departments[currentDepartment].shortForm.toLowerCase()}-${
+                    isOddTerm ? "winter" : "summer"
+                  }${yearPickerRef.current}-sem${currentSem}.pdf`
                 );
               }
             );
