@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useReducer } from "react";
+import { useState, useEffect, useMemo, useReducer, useRef } from "react";
 import Body from "./components/Body";
 import Header from "./components/Header";
 import { departments } from "./utils";
@@ -14,6 +14,7 @@ function App() {
   );
   const { batches } = departments[currentDepartment];
   const [isOddTerm, toggleIsOddTerm] = useReducer(state => !state, true);
+  const yearPickerRef = useRef(new Date().getFullYear());
   const [currentSem, setCurrentSem] = useState(1);
   const [table, setTable] = useState({
     computer: {
@@ -196,12 +197,21 @@ function App() {
               dataURL => {
                 // eslint-disable-next-line new-cap
                 const doc = new jsPDF("landscape");
-                doc.setFontSize(40);
-                doc.text(`Timetable for sem ${currentSem}`, 85, 20, {
-                  align: "left",
-                });
-                doc.addImage(dataURL, 3, 30, 290, 100);
-                doc.save(`kjsp-${currentDepartment}-tt-sem${currentSem}.pdf`);
+                doc.setFontSize(20);
+                doc.text(`K. J. Somaiya Polytechnic`, 115, 10);
+                doc.text(
+                  `${isOddTerm ? "Winter" : "Summer"} ${yearPickerRef.current}`,
+                  130,
+                  20
+                );
+                doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 125, 30);
+                doc.text(`Semester ${currentSem}`, 132, 40);
+                doc.addImage(dataURL, 3, 50, 290, 100);
+                doc.save(
+                  `${currentDepartment}-${isOddTerm ? "winter" : "summer"}${
+                    yearPickerRef.current
+                  }-sem${currentSem}-kjsp.pdf`
+                );
               }
             );
           })
@@ -219,6 +229,7 @@ function App() {
   return (
     <>
       <Header
+        yearPickerRef={yearPickerRef}
         subjects={subjects}
         teachers={teachers}
         batches={batches}

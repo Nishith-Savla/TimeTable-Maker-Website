@@ -6,6 +6,7 @@ import { drag } from "../utils";
 import YearPicker from "../common/YearPicker";
 
 const Header = ({
+  yearPickerRef,
   subjects,
   teachers,
   batches,
@@ -55,9 +56,13 @@ const Header = ({
             onChange={onDepartmentChange}
           />
           <YearPicker
+            ref={yearPickerRef}
             className="dropdown year-changer"
             start={new Date().getFullYear()}
             end={new Date().getFullYear() + 2}
+            onChange={e => {
+              yearPickerRef.current = e.target.value;
+            }}
           />
           <Dropdown
             name="term"
