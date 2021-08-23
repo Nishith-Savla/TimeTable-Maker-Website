@@ -32,7 +32,7 @@ const Table = ({
 
       {rows.map(row => {
         return (
-          <div className="tr">
+          <div key={row} className="tr">
             <span className="th" style={{ width: `${columnWidths[0]}%` }}>
               {row}
             </span>

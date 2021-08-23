@@ -170,7 +170,7 @@ function App() {
     }
 
     let swalImported = false;
-    const alertMsg = `A clash may happen if you add ${text.trim()} at ${time} on ${day}.`;
+    const alertMsg = `A clash may happen if you add ${draggedText.trim()} at ${time} on ${day}.`;
     import("sweetalert2")
       .then(module => {
         const Swal = module.default;

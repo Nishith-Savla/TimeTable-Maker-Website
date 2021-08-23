@@ -1,8 +1,14 @@
 import React from "react";
 
-const Dropdown = ({ name, options, className, onChange, ref = undefined }) => (
+const Dropdown = ({
+  name,
+  options,
+  className,
+  onChange,
+  dropdownRef = undefined,
+}) => (
   <select
-    ref={ref}
+    ref={dropdownRef}
     className={className}
     name={name}
     id={name}

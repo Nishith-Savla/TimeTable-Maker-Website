@@ -55,7 +55,7 @@ const Header = ({
             onChange={onDepartmentChange}
           />
           <YearPicker
-            ref={yearPickerRef}
+            yearPickerRef={yearPickerRef}
             className="dropdown year-changer"
             start={new Date().getFullYear()}
             end={new Date().getFullYear() + 2}
