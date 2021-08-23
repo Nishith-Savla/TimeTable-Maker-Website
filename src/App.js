@@ -4,6 +4,10 @@ import Header from "./components/Header";
 import { departments } from "./utils";
 import "./styles/root.scss";
 
+let Swal;
+let jsPDF;
+let DomToImage;
+
 function App() {
   const [currentDepartment, setCurrentDepartment] = useState("computer");
   const [subjects, setSubjects] = useState(
@@ -64,6 +68,19 @@ function App() {
     () => sems.filter(sem => sem % 2 === Number(isOddTerm)),
     [isOddTerm]
   );
+
+  // Load external libraries after the DOM is loaded.
+  useEffect(() => {
+    import("sweetalert2").then(module => {
+      Swal = module.default;
+    });
+    import("jspdf").then(module => {
+      jsPDF = module.default;
+    });
+    import("dom-to-image").then(module => {
+      DomToImage = module.default;
+    });
+  }, []);
 
   const handleElementDelete = (element, type) =>
     type === "subject"
@@ -169,60 +186,39 @@ function App() {
       return true;
     }
 
-    let swalImported = false;
     const alertMsg = `A clash may happen if you add ${draggedText.trim()} at ${time} on ${day}.`;
-    import("sweetalert2")
-      .then(module => {
-        const Swal = module.default;
-        swalImported = true;
-        Swal.fire({
-          title: "Clash Alert",
-          text: alertMsg,
-          icon: "error",
-        });
-      })
-      .catch(swalImported && alert(alertMsg));
+    if (Swal)
+      Swal.fire({
+        title: "Clash Alert",
+        text: alertMsg,
+        icon: "error",
+      });
+    // eslint-disable-next-line no-unused-expressions
+    else alert(alertMsg);
     return false;
   };
 
   const downloadPDF = () => {
-    // Importing jspdf only when needed
-    import("jspdf")
-      .then(module => {
-        const jsPDF = module.default;
-        import("dom-to-image")
-          .then(domToImageModule => {
-            const DomToImage = domToImageModule.default;
-            DomToImage.toPng(document.querySelector(".timetable")).then(
-              dataURL => {
-                // eslint-disable-next-line new-cap
-                const doc = new jsPDF("landscape");
-                doc.setFontSize(20);
-                doc.text(`K. J. Somaiya Polytechnic`, 115, 10);
-                doc.text(
-                  `${isOddTerm ? "Winter" : "Summer"} ${yearPickerRef.current}`,
-                  130,
-                  20
-                );
-                doc.text(
-                  `${departments[currentDepartment].label} Engineering`,
-                  117,
-                  30
-                );
-                doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 130, 40);
-                doc.text(`Semester ${currentSem}`, 135, 50);
-                doc.addImage(dataURL, 3, 60, 290, 100);
-                doc.save(
-                  `${departments[currentDepartment].shortForm.toLowerCase()}-${
-                    isOddTerm ? "winter" : "summer"
-                  }${yearPickerRef.current}-sem${currentSem}.pdf`
-                );
-              }
-            );
-          })
-          .catch(() => alert("Internet is required to download the PDF."));
-      })
-      .catch(() => alert("Internet is required to download the PDF."));
+    DomToImage.toPng(document.querySelector(".timetable")).then(dataURL => {
+      // eslint-disable-next-line new-cap
+      const doc = new jsPDF("landscape");
+      doc.setFontSize(20);
+      doc.text(`K. J. Somaiya Polytechnic`, 115, 10);
+      doc.text(
+        `${isOddTerm ? "Winter" : "Summer"} ${yearPickerRef.current.value}`,
+        130,
+        20
+      );
+      doc.text(`${departments[currentDepartment].label} Engineering`, 117, 30);
+      doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 130, 40);
+      doc.text(`Semester ${currentSem}`, 135, 50);
+      doc.addImage(dataURL, 3, 60, 290, 100);
+      doc.save(
+        `${departments[currentDepartment].shortForm.toLowerCase()}-${
+          isOddTerm ? "winter" : "summer"
+        }${yearPickerRef.current.value}-sem${currentSem}.pdf`
+      );
+    });
   };
 
   // Change sems on term change
