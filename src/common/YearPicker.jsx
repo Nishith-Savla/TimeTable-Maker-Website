@@ -1,7 +1,15 @@
 import Dropdown from "./Dropdown";
 
-const YearPicker = ({ yearPickerRef, start, end, className, onChange }) => (
+const YearPicker = ({
+  yearPickerRef,
+  start,
+  end,
+  className,
+  tooltip,
+  onChange,
+}) => (
   <Dropdown
+    tooltip={tooltip}
     dropdownRef={yearPickerRef}
     name="year"
     className={className}

@@ -124,12 +124,25 @@ button {
   .teacher,
   .batch {
     margin: 5px 15px;
+    letter-spacing: 0.02ch;
+  }
+
+  h4 {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #000;
+    line-height: 0em;
+    margin: 10px 0;
+
+    span {
+      background: #fff;
+      padding: 0 10px;
+    }
   }
 }
 
 .subject {
   background: $blue;
-  letter-spacing: 0.05ch;
 }
 
 .teachers {

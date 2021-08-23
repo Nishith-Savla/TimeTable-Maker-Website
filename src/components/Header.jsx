@@ -46,6 +46,7 @@ const Header = ({
           <Dropdown
             name="department"
             className="dropdown dept-changer"
+            tooltip="Department"
             options={Object.keys(departments).map(departmentName => {
               return {
                 value: departmentName,
@@ -59,6 +60,7 @@ const Header = ({
             className="dropdown year-changer"
             start={new Date().getFullYear()}
             end={new Date().getFullYear() + 2}
+            tooltip="Year"
             onChange={e => {
               yearPickerRef.current = e.target.value;
             }}
@@ -66,6 +68,7 @@ const Header = ({
           <Dropdown
             name="term"
             className="dropdown term-changer"
+            tooltip="Term"
             options={[
               { value: "odd", label: "Odd" },
               { value: "even", label: "Even" },
@@ -96,6 +99,9 @@ const Header = ({
       </div>
 
       <div className="subjects">
+        <h4>
+          <span>Courses: </span>
+        </h4>
         {subjects[currentSem].map(subject => {
           return (
             <Button
@@ -119,6 +125,9 @@ const Header = ({
       </div>
 
       <div className="teachers">
+        <h4>
+          <span>Teachers: </span>
+        </h4>
         {teachers.map(teacher => {
           return (
             <Button
@@ -142,6 +151,9 @@ const Header = ({
       </div>
 
       <div className="batches">
+        <h4>
+          <span>Batches: </span>
+        </h4>
         {batches.map(batch => (
           <Button
             className="button batch"
