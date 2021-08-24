@@ -102,7 +102,7 @@ button {
 }
 
 .button {
-  padding: 6px 2px 6px 10.5px;
+  padding: 6px;
   background: $grey;
   border-radius: 25px;
   display: flex;
@@ -123,6 +123,7 @@ button {
   .subject,
   .teacher,
   .batch {
+    padding: 6px 2px 6px 10.5px;
     margin: 5px 15px;
     letter-spacing: 0.02ch;
   }
@@ -155,17 +156,17 @@ button {
 
 .batch {
   background: $darkblue;
-  padding-right: 10px;
+  padding-right: 10px !important;
 }
 
 .add-subject {
   background: hsl(173, 100%, 65%);
-  padding: 6px 10px;
+  padding: 6px 10px !important;
 }
 
 .add-teacher {
   background: hsl(120, 100%, 65%);
-  padding: 6px 10px;
+  padding: 6px 10px !important;
 }
 
 .timetable {

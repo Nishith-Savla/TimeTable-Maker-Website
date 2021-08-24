@@ -1,7 +1,8 @@
+import Button from "../common/Button";
 import Table from "../common/DivSpanTable";
 import { allowDrop, drop } from "../utils";
 
-const Body = ({ currentSem, table, onTableSet }) => {
+const Body = ({ currentSem, table, onTableSet, onTableClear }) => {
   return (
     <div className="app-body">
       <Table
@@ -30,6 +31,12 @@ const Body = ({ currentSem, table, onTableSet }) => {
         contentEditable
         onChange={onTableSet}
         state={table[currentSem]}
+      />
+      <Button
+        className="button clear"
+        name="clear"
+        text="Clear"
+        onClick={onTableClear}
       />
     </div>
   );

@@ -71,6 +71,9 @@ function App() {
 
   // Load external libraries after the DOM is loaded.
   useEffect(() => {
+    const localStorageTable = JSON.parse(localStorage.getItem("table"));
+    // eslint-disable-next-line no-unused-expressions
+    localStorageTable && setTable(localStorageTable);
     import("sweetalert2").then(module => {
       Swal = module.default;
     });
@@ -126,6 +129,10 @@ function App() {
     setSubjects(departments[currentDepartment]?.subjects);
     setTeachers(departments[currentDepartment]?.teachers);
   }, [currentDepartment]);
+
+  useEffect(() => {
+    localStorage.setItem("table", JSON.stringify(table));
+  }, [table]);
 
   const doesClash = (time, day, text) => {
     const filteredSlots = [];
@@ -198,6 +205,10 @@ function App() {
     return false;
   };
 
+  const handleTableClear = () => {
+    setTable(initialTable);
+  };
+
   const downloadPDF = () => {
     DomToImage.toPng(document.querySelector(".timetable")).then(dataURL => {
       // eslint-disable-next-line new-cap
@@ -248,6 +259,7 @@ function App() {
         currentSem={currentSem}
         table={table[currentDepartment]}
         onTableSet={handleTableSet}
+        onTableClear={handleTableClear}
       />
     </>
   );
