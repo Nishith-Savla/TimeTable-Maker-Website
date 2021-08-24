@@ -54,7 +54,7 @@ const Table = ({
                   }}
                 >
                   {
-                    state.filter(
+                    state?.filter(
                       cell => cell.day === row && cell.time === column
                     )[0]?.text
                   }

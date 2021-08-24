@@ -20,48 +20,14 @@ function App() {
   const [isOddTerm, toggleIsOddTerm] = useReducer(state => !state, true);
   const yearPickerRef = useRef(new Date().getFullYear());
   const [currentSem, setCurrentSem] = useState(1);
-  const [table, setTable] = useState({
-    computer: {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-    },
-    electrical: {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-    },
-    industrial: {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-    },
-    mechanical: {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-    },
-    civil: {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-    },
-  });
+  const initialTable = {
+    computer: {},
+    electrical: {},
+    industrial: {},
+    mechanical: {},
+    civil: {},
+  };
+  const [table, setTable] = useState(initialTable);
 
   const sems = [1, 2, 3, 4, 5, 6];
   let filteredSems = useMemo(
@@ -141,9 +107,9 @@ function App() {
         .filter(sem => sem !== currentSem || department !== currentDepartment)
         .forEach(sem => {
           filteredSlots.push(
-            table[department][sem].filter(
+            table[department][sem]?.filter(
               cell => cell.day === day && cell.time === time
-            )[0]
+            )[0] || null
           );
         });
     });
@@ -161,15 +127,16 @@ function App() {
     const text = e.target.innerText || "";
 
     if (!doesClash(time, day, text)) {
-      const index = table[currentDepartment][currentSem].findIndex(
-        cell => cell.time === time && cell.day === day
-      );
+      const index =
+        table[currentDepartment][currentSem]?.findIndex(
+          cell => cell.time === time && cell.day === day
+        ) || -1;
       const current = {
         time,
         day,
         text,
         draggedTexts:
-          table[currentDepartment][currentSem][index]?.draggedTexts || [],
+          table[currentDepartment][currentSem]?.[index]?.draggedTexts || [],
       };
       current.draggedTexts.push(draggedText.trim());
 
@@ -179,7 +146,9 @@ function App() {
           ...prevTable[currentDepartment],
           [currentSem]:
             index === -1
-              ? prevTable[currentDepartment][currentSem].concat([current])
+              ? (prevTable[currentDepartment][currentSem] ?? []).concat([
+                  current,
+                ])
               : [
                   ...prevTable[currentDepartment][currentSem].slice(0, index),
                   {
