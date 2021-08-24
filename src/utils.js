@@ -66,6 +66,7 @@ const departments = {
       "S. Y. Tambe",
     ],
     batches: ["C1:\xa0", "C2:\xa0", "C3:\xa0"],
+    rooms: ["101", "102", "103", "207", "208", "209B"],
   },
   electrical: {
     label: "Electrical",
@@ -136,6 +137,7 @@ const departments = {
       "A. S. Lalla",
     ],
     batches: ["E1:\xa0", "E2:\xa0", "E3:\xa0"],
+    rooms: ["21", "22", "211", "05", "105"],
   },
   industrial: {
     label: "Industrial Electronics",
@@ -201,6 +203,7 @@ const departments = {
       "S. S. Kolekar",
     ],
     batches: ["IE1:\xa0", "IE2:\xa0", "IE3:\xa0"],
+    rooms: ["201", "204", "205", "101", "104"],
   },
   mechanical: {
     label: "Mechanical",
@@ -271,6 +274,7 @@ const departments = {
       "S. B. Kasar",
     ],
     batches: ["M1:\xa0", "M2:\xa0", "M3:\xa0"],
+    rooms: ["107", "108", "D4", "MCQ", "HE"],
   },
   civil: {
     label: "Civil",
@@ -336,6 +340,7 @@ const departments = {
       "V. G. Patil",
     ],
     batches: ["CE1:\xa0", "CE2:\xa0", "CE3:\xa0"],
+    rooms: ["106", "109", "109A"],
   },
 };
 
