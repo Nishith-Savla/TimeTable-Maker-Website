@@ -13,6 +13,10 @@
     // "react/jsx-props-no-spreading": "off",
     // "import/prefer-default-export": "off",
     // "react/no-array-index-key": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ]
   }
 }
