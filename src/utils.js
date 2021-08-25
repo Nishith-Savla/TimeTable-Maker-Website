@@ -374,16 +374,18 @@ const allowDrop = ev => ev.preventDefault();
 
 const drag = ev => ev.dataTransfer.setData("text", ev.target.id);
 
-const drop = (ev, callback) => {
-  ev.preventDefault();
-  const data = document.getElementById(ev.dataTransfer.getData("text"));
+const drop = (e, callback) => {
+  e.preventDefault();
+  const data = document.getElementById(e.dataTransfer.getData("text"));
 
   const text = data.classList.contains("subject")
     ? data.innerText.split(" ").slice(0, -1).join(" ")
     : data.innerText;
-  const prevText = ev.target.innerText;
-  ev.target.innerText += `${text}${
-    (/^[CMEI]E?[1-3]/.test(ev.target.innerText) ||
+
+  const prevText = e.target.innerText;
+
+  e.target.innerText += `${text}${
+    (/^[CMEI]E?[1-3]/.test(e.target.innerText) ||
       /^[CMEI]E?[1-3]/.test(data.innerText)) &&
     (data.classList.contains("subject") || data.classList.contains("batch"))
       ? "\xa0"
@@ -391,7 +393,7 @@ const drop = (ev, callback) => {
   }`;
 
   // ev.target.innerText = !callback(ev) ? prevText : "";
-  if (!callback(ev, data.innerText)) ev.target.innerText = prevText;
+  if (!callback(e, data.innerText)) e.target.innerText = prevText;
 };
 
 export {

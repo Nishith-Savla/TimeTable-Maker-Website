@@ -10,6 +10,7 @@ const Header = ({
   subjects,
   teachers,
   batches,
+  rooms,
   onDelete,
   currentSem,
   onTermChange,
@@ -160,6 +161,22 @@ const Header = ({
             key={batch}
             name={batch}
             text={batch}
+            draggable
+            onDragStart={drag}
+          />
+        ))}
+      </div>
+
+      <div className="rooms">
+        <h4>
+          <span>Rooms & Labs: </span>
+        </h4>
+        {rooms.map(room => (
+          <Button
+            className="button room"
+            key={room}
+            name={room}
+            text={room}
             draggable
             onDragStart={drag}
           />

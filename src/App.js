@@ -16,7 +16,7 @@ function App() {
   const [teachers, setTeachers] = useState(
     departments[currentDepartment].teachers
   );
-  const { batches } = departments[currentDepartment];
+  const { batches, rooms } = departments[currentDepartment];
   const [isOddTerm, toggleIsOddTerm] = useReducer(state => !state, true);
   const yearPickerRef = useRef(new Date().getFullYear());
   const [currentSem, setCurrentSem] = useState(1);
@@ -38,7 +38,6 @@ function App() {
   // Load external libraries after the DOM is loaded.
   useEffect(() => {
     const localStorageTable = JSON.parse(localStorage.getItem("table"));
-    // eslint-disable-next-line no-unused-expressions
     localStorageTable && setTable(localStorageTable);
     import("sweetalert2").then(module => {
       Swal = module.default;
@@ -66,7 +65,6 @@ function App() {
   const handleKeyPress = (e, type) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      // eslint-disable-next-line no-unused-expressions
       type === "subject"
         ? setSubjects(prevSubjects => ({
             ...prevSubjects,
@@ -116,7 +114,8 @@ function App() {
     return filteredSlots.some(slot =>
       slot?.draggedTexts.some(
         draggedText =>
-          teachers.includes(draggedText) && text.includes(draggedText)
+          (rooms.includes(draggedText) || teachers.includes(draggedText)) &&
+          text.includes(draggedText)
       )
     );
   };
@@ -130,15 +129,17 @@ function App() {
       const index =
         table[currentDepartment][currentSem]?.findIndex(
           cell => cell.time === time && cell.day === day
-        ) || -1;
+        ) ?? -1;
       const current = {
         time,
         day,
         text,
         draggedTexts:
-          table[currentDepartment][currentSem]?.[index]?.draggedTexts || [],
+          !draggedText && !text.trim()
+            ? []
+            : table[currentDepartment][currentSem]?.[index]?.draggedTexts || [],
       };
-      current.draggedTexts.push(draggedText.trim());
+      draggedText && current.draggedTexts.push(draggedText.trim());
 
       setTable(prevTable => ({
         ...prevTable,
@@ -169,7 +170,6 @@ function App() {
         text: alertMsg,
         icon: "error",
       });
-    // eslint-disable-next-line no-unused-expressions
     else alert(alertMsg);
     return false;
   };
@@ -214,6 +214,7 @@ function App() {
         subjects={subjects}
         teachers={teachers}
         batches={batches}
+        rooms={rooms}
         onDelete={handleElementDelete}
         currentSem={currentSem}
         onTermChange={toggleIsOddTerm}

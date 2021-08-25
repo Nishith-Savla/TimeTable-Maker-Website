@@ -47,11 +47,11 @@ const Table = ({
                   onDragOver={isBreak ? null : e => onDragOver(e)}
                   key={`${column} ${row}`}
                   style={{ width: `${columnWidths[index + 1]}%` }}
-                  suppressContentEditableWarning
                   onInput={e => {
                     onChange(e);
                     placeCursorAtEnd();
                   }}
+                  suppressContentEditableWarning
                 >
                   {
                     state?.filter(

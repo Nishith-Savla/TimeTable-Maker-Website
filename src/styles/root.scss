@@ -1,7 +1,8 @@
 // Color Variables
-$blue: hsl(173, 100%, 65%);
-$green: hsl(120, 100%, 65%);
-$darkblue: hsl(226, 60%, 75%);
+$color1: #4dffea;
+$color2: #cd9fff;
+$color3: #fd8248;
+$color4: #f5f514;
 $grey: #ddd;
 
 %black-border {
@@ -14,7 +15,7 @@ $grey: #ddd;
 }
 
 %selected {
-  background: linear-gradient(93deg, $blue 0%, $green 100%);
+  background: linear-gradient(93deg, $color1 0%, $color4 100%);
   font-weight: bold;
   letter-spacing: 1px;
   transition: all 0.5s ease;
@@ -117,12 +118,14 @@ button {
 
 .subjects,
 .teachers,
-.batches {
+.batches,
+.rooms {
   @extend %display-flex-wrap;
 
   .subject,
   .teacher,
-  .batch {
+  .batch,
+  .room {
     padding: 6px 2px 6px 10.5px;
     margin: 5px 15px;
     letter-spacing: 0.02ch;
@@ -143,30 +146,31 @@ button {
 }
 
 .subject {
-  background: $blue;
-}
-
-.teachers {
-  margin: 10px 0px;
+  background: $color1;
 }
 
 .teacher {
-  background: $green;
+  background: $color2;
 }
 
 .batch {
-  background: $darkblue;
+  background: $color3;
+  padding-right: 10px !important;
+}
+
+.room {
+  background: $color4;
   padding-right: 10px !important;
 }
 
 .add-subject {
-  background: hsl(173, 100%, 65%);
-  padding: 6px 10px !important;
+  background: $color1;
+  padding: 6px 11px !important;
 }
 
 .add-teacher {
-  background: hsl(120, 100%, 65%);
-  padding: 6px 10px !important;
+  background: $color2;
+  padding: 6px 11px !important;
 }
 
 .timetable {
