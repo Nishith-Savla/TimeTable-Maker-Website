@@ -1,3 +1,6 @@
+const BATCHES_REGEX = /^[CMEI]E?[1-3]/;
+const NBSP = "\xa0";
+
 const departments = {
   computer: {
     label: "Computer",
@@ -65,7 +68,7 @@ const departments = {
       "J. M. Mane",
       "S. Y. Tambe",
     ],
-    batches: ["C1:\xa0", "C2:\xa0", "C3:\xa0"],
+    batches: [`C1:${NBSP}`, `C2:${NBSP}`, `C3:${NBSP}`],
     rooms: ["101", "102", "103", "207", "208", "209B"],
   },
   electrical: {
@@ -136,7 +139,7 @@ const departments = {
       "R. M. Homakar",
       "A. S. Lalla",
     ],
-    batches: ["E1:\xa0", "E2:\xa0", "E3:\xa0"],
+    batches: [`E1:${NBSP}`, `E2:${NBSP}`, `E3:${NBSP}`],
     rooms: ["21", "22", "211", "05", "105"],
   },
   industrial: {
@@ -202,7 +205,7 @@ const departments = {
       "A. R. Wasule",
       "S. S. Kolekar",
     ],
-    batches: ["IE1:\xa0", "IE2:\xa0", "IE3:\xa0"],
+    batches: [`IE1:${NBSP}`, `IE2:${NBSP}`, `IE3:${NBSP}`],
     rooms: ["201", "204", "205", "101", "104"],
   },
   mechanical: {
@@ -273,7 +276,7 @@ const departments = {
       "P. R. Patil",
       "S. B. Kasar",
     ],
-    batches: ["M1:\xa0", "M2:\xa0", "M3:\xa0"],
+    batches: [`M1:${NBSP}`, `M2:${NBSP}`, `M3:${NBSP}`],
     rooms: ["107", "108", "D4", "MCQ", "HE"],
   },
   civil: {
@@ -339,7 +342,7 @@ const departments = {
       "S. Y. Tambe",
       "V. G. Patil",
     ],
-    batches: ["CE1:\xa0", "CE2:\xa0", "CE3:\xa0"],
+    batches: [`CE1:${NBSP}`, `CE2:${NBSP}`, `CE3:${NBSP}`],
     rooms: ["106", "109", "109A"],
   },
 };
@@ -385,10 +388,10 @@ const drop = (e, callback) => {
   const prevText = e.target.innerText;
 
   e.target.innerText += `${text}${
-    (/^[CMEI]E?[1-3]/.test(e.target.innerText) ||
-      /^[CMEI]E?[1-3]/.test(data.innerText)) &&
+    (BATCHES_REGEX.test(e.target.innerText) ||
+      BATCHES_REGEX.test(data.innerText)) &&
     (data.classList.contains("subject") || data.classList.contains("batch"))
-      ? "\xa0"
+      ? NBSP
       : "\n"
   }`;
 
@@ -403,4 +406,5 @@ export {
   allowDrop,
   drag,
   drop,
+  NBSP,
 };
