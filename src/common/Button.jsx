@@ -10,6 +10,8 @@ const Button = ({
   onClick,
   onKeyUp,
   onDragStart,
+  contentEditable,
+  onInput,
 }) => {
   return (
     <button
@@ -21,6 +23,8 @@ const Button = ({
       draggable={draggable}
       onDragStart={onDragStart}
       onKeyUp={onKeyUp}
+      contentEditable={contentEditable}
+      onInput={onInput}
     >
       {text} {children}
     </button>

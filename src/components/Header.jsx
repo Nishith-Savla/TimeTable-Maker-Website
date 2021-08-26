@@ -17,6 +17,7 @@ const Header = ({
   onSemChange,
   filteredSems,
   onAddButtonClick,
+  onInput,
   onKeyUp,
   onDownload,
   onDepartmentChange,
@@ -121,6 +122,7 @@ const Header = ({
           className="button add-subject subject"
           text="+"
           onClick={onAddButtonClick}
+          onInput={e => onInput(e, "subject")}
           onKeyUp={e => onKeyUp(e, "subject")}
         />
       </div>
@@ -147,6 +149,7 @@ const Header = ({
           className="button add-teacher teacher"
           text="+"
           onClick={onAddButtonClick}
+          onInput={e => onInput(e, "teacher")}
           onKeyUp={e => onKeyUp(e, "teacher")}
         />
       </div>

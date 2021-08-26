@@ -28,6 +28,8 @@ function App() {
     civil: {},
   };
   const [table, setTable] = useState(initialTable);
+  const [newSubject, setNewSubject] = useState("");
+  const [newTeacher, setNewTeacher] = useState("");
 
   const sems = [1, 2, 3, 4, 5, 6];
   let filteredSems = useMemo(
@@ -62,22 +64,30 @@ function App() {
           prevTeachers.filter(currentTeacher => currentTeacher !== element)
         );
 
-  const handleKeyPress = (e, type) => {
+  const handleAddButtonKeyUp = (e, type) => {
     if (e.key === "Enter") {
       e.preventDefault();
       type === "subject"
         ? setSubjects(prevSubjects => ({
             ...prevSubjects,
-            [currentSem]: [...prevSubjects[currentSem], e.target.innerText],
+            [currentSem]: [...prevSubjects[currentSem], newSubject],
           }))
-        : setTeachers(prevTeachers => [...prevTeachers, e.target.innerText]);
+        : setTeachers(prevTeachers => [...prevTeachers, newTeacher]);
+      e.target.innerText = "+";
+      e.target.contentEditable = false;
     }
+  };
+
+  const handleAddButtonInput = (e, type) => {
+    type === "subject"
+      ? setNewSubject(e.target.innerText)
+      : setNewTeacher(e.target.innerText);
   };
 
   const handleAddButtonClick = e => {
     e.preventDefault();
     e.target.contentEditable = true;
-    // e.target.innerText = "\xa0";
+    e.target.innerText = "";
     e.target.focus();
   };
 
@@ -221,7 +231,8 @@ function App() {
         onSemChange={handleSemChange}
         filteredSems={filteredSems}
         onAddButtonClick={handleAddButtonClick}
-        onKeyUp={handleKeyPress}
+        onInput={handleAddButtonInput}
+        onKeyUp={handleAddButtonKeyUp}
         onDownload={downloadPDF}
         onDepartmentChange={handleDepartmentChange}
       />
