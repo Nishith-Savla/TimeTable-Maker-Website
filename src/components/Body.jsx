@@ -1,8 +1,8 @@
 import Button from "../common/Button";
 import Table from "../common/DivSpanTable";
-import { allowDrop, drop } from "../utils";
+import { allowDrop } from "../utils";
 
-const Body = ({ currentSem, table, onTableSet, onTableClear }) => {
+const Body = ({ currentSem, table, onTableSet, onTableClear, onDrop }) => {
   return (
     <div className="app-body">
       <Table
@@ -26,7 +26,7 @@ const Body = ({ currentSem, table, onTableSet, onTableClear }) => {
           "Friday",
           "Saturday",
         ]}
-        onDrop={drop}
+        onDrop={onDrop}
         onDragOver={allowDrop}
         contentEditable
         onChange={onTableSet}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useReducer, useRef } from "react";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import { departments } from "./utils";
+import { departments, getShortFormOfName, BATCHES_REGEX, NBSP } from "./utils";
 import "./styles/root.scss";
 
 let Swal;
@@ -107,6 +107,43 @@ function App() {
   useEffect(() => {
     localStorage.setItem("table", JSON.stringify(table));
   }, [table]);
+
+  const handleDrop = (e, callback) => {
+    e.preventDefault();
+    const data = document.getElementById(e.dataTransfer.getData("text"));
+
+    const time = e.target.id.split(" ").slice(0, -1).join(" ");
+    const day = e.target.id.split(" ").slice(-1)[0];
+
+    let text = data.classList.contains("subject")
+      ? data.innerText.split(" ").slice(0, -1).join(" ")
+      : data.innerText;
+
+    const currentCell = table[currentDepartment]?.[currentSem]?.filter(
+      cell => cell.time === time && cell.day === day
+    )[0];
+
+    if (
+      currentCell?.draggedTexts?.some(draggedText =>
+        / (lab|workshop)\)?( \(\d{1,2}\))?$/i.test(draggedText)
+      ) &&
+      data.classList.contains("teacher")
+    )
+      text = getShortFormOfName(text);
+
+    const prevText = e.target.innerText;
+
+    e.target.innerText += `${text}${
+      (BATCHES_REGEX.test(e.target.innerText) ||
+        BATCHES_REGEX.test(data.innerText)) &&
+      (data.classList.contains("subject") || data.classList.contains("batch"))
+        ? NBSP
+        : "\n"
+    }`;
+
+    // ev.target.innerText = !callback(ev) ? prevText : "";
+    if (!callback(e, data.innerText)) e.target.innerText = prevText;
+  };
 
   const doesClash = (time, day, text) => {
     const filteredSlots = [];
@@ -239,6 +276,7 @@ function App() {
       <Body
         currentSem={currentSem}
         table={table[currentDepartment]}
+        onDrop={handleDrop}
         onTableSet={handleTableSet}
         onTableClear={handleTableClear}
       />

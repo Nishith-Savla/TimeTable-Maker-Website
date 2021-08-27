@@ -113,7 +113,7 @@ const departments = {
         "PED (04)",
         "TMEE (04)",
         "T & D (04)",
-        "OPTION-1 SSP-1 (04)",
+        "Opt 1 SSP-I (04)",
         "T & M lab (04)",
         "PW&S (06)",
         "CGP (04)",
@@ -152,7 +152,7 @@ const departments = {
         "Physics-I (04)",
         "Behavioral Science (04)",
         "Engineering Graphics (04)",
-        "(Workshop IE) (06)",
+        "Workshop IE (06)",
         "Physics-I Pract (04)",
       ],
       2: [
@@ -218,8 +218,8 @@ const departments = {
         "Physics-I (04)",
         "Engineering Mechanics (04)",
         "MEP III (Phy. lab) (04)",
-        "MEP I(Engg. Mechanics + Basic ME (04)",
-        "MEP II-M(EGP+CAD) (06)",
+        "MEP I (Engg. Mechanics + Basic ME (04)",
+        "MEP II-M (EGP+CAD) (06)",
       ],
       2: [
         "Basic Maths (05)",
@@ -227,8 +227,8 @@ const departments = {
         "Physics-I (04)",
         "Engineering Mechanics (04)",
         "MEP III (Phy. lab) (04)",
-        "MEP I(Engg. Mechanics + Basic ME (04)",
-        "MEP II-M(EGP+CAD) (06)",
+        "MEP I (Engg. Mechanics + Basic ME (04)",
+        "MEP II-M (EGP+CAD) (06)",
       ],
       3: [
         "Theory of Machines (05)",
@@ -242,7 +242,7 @@ const departments = {
       4: [
         "Engineering Thermodynamics (05)",
         "Metrology & Quality Assurance  (04)",
-        "MEP-VIII (Fluid Mechanics+Engg. Thermodynamics (04)",
+        "MEP-VIII (Fluid Mechanics + Engg. Thermodynamics (04)",
         "MEP-IX (MQA + Manufacturing Process Workshop) (06)",
         "Fluid Mechanics (05) ",
       ],
@@ -260,7 +260,7 @@ const departments = {
         "Production Planning & Control (04)",
         "CNC Machines (04)",
         "Design of Machine Elements (04)",
-        "MEP-XIII(Thermal Engg. + Machnine Design (04)",
+        "MEP-XIII (Thermal Engg. + Machnine Design (04)",
         "Engg. Estimating & Costing (04)",
         "Management IE ()",
       ],
@@ -310,7 +310,7 @@ const departments = {
         "SUR-II (04)",
         "CEP-VIII Material testing-II (04)",
         "CEP-IX Survey-II & Build. Draw. (04)",
-        "Engg. Maths./Maths-III (04)",
+        "Engg. Maths/Maths-III (04)",
       ],
       5: [
         "TOS (04)",
@@ -318,7 +318,7 @@ const departments = {
         "SUR-II (04)",
         "CEP-VIII Material testing-II (04)",
         "CEP-IX Survey-II & Build. Draw. (04)",
-        "Engg. Maths./Maths-III (04)",
+        "Engg. Maths/Maths-III (04)",
       ],
       6: [
         "CAV (04)",
@@ -345,6 +345,12 @@ const departments = {
     batches: [`CE1:${NBSP}`, `CE2:${NBSP}`, `CE3:${NBSP}`],
     rooms: ["106", "109", "109A"],
   },
+};
+
+const getShortFormOfName = name => {
+  const splitNames = name.split(". ");
+  console.log(splitNames[0] + splitNames[1] + splitNames[2][0]);
+  return splitNames[0] + splitNames[1] + splitNames[2][0];
 };
 
 const columnWidths = [8, 14, 14, 4, 14, 14, 4, 14, 14];
@@ -377,34 +383,13 @@ const allowDrop = ev => ev.preventDefault();
 
 const drag = ev => ev.dataTransfer.setData("text", ev.target.id);
 
-const drop = (e, callback) => {
-  e.preventDefault();
-  const data = document.getElementById(e.dataTransfer.getData("text"));
-
-  const text = data.classList.contains("subject")
-    ? data.innerText.split(" ").slice(0, -1).join(" ")
-    : data.innerText;
-
-  const prevText = e.target.innerText;
-
-  e.target.innerText += `${text}${
-    (BATCHES_REGEX.test(e.target.innerText) ||
-      BATCHES_REGEX.test(data.innerText)) &&
-    (data.classList.contains("subject") || data.classList.contains("batch"))
-      ? NBSP
-      : "\n"
-  }`;
-
-  // ev.target.innerText = !callback(ev) ? prevText : "";
-  if (!callback(e, data.innerText)) e.target.innerText = prevText;
-};
-
 export {
   departments,
+  getShortFormOfName,
   columnWidths,
   placeCursorAtPosition,
   allowDrop,
   drag,
-  drop,
+  BATCHES_REGEX,
   NBSP,
 };
