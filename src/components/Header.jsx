@@ -2,7 +2,8 @@ import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { ReactComponent as Cross } from "../assets/Cross.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
-import { departments, drag } from "../utils";
+import { drag } from "../utils";
+import departments from "../data/departments.json";
 import YearPicker from "../common/YearPicker";
 
 const Header = ({

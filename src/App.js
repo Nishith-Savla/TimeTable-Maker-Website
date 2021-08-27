@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo, useReducer, useRef } from "react";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import { departments, getShortFormOfName, BATCHES_REGEX, NBSP } from "./utils";
+import { getShortFormOfName, BATCHES_REGEX, NBSP } from "./utils";
+import departments from "./data/departments.json";
+
 import "./styles/root.scss";
 
 let Swal;
