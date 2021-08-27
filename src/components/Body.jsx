@@ -1,5 +1,5 @@
 import Button from "../common/Button";
-import Table from "../common/DivSpanTable";
+import Table from "../common/Table";
 import { allowDrop } from "../utils";
 
 const Body = ({ currentSem, table, onTableSet, onTableClear, onDrop }) => {
