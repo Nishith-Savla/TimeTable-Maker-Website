@@ -219,7 +219,26 @@ function App() {
   };
 
   const handleTableClear = () => {
-    setTable(initialTable);
+    if (Swal)
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Are you sure you want to clear the table?",
+        footer: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "hsl(133, 80%, 33%)",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, clear it!",
+      }).then(result => {
+        if (result.isConfirmed) {
+          setTable(initialTable);
+          Swal.fire("Cleared!", "All tables have been cleared.", "success");
+        }
+      });
+    else if (window.confirm("Are you sure you want to clear the table?")) {
+      setTable(initialTable);
+      alert("All tables have been cleared!");
+    }
   };
 
   const downloadPDF = () => {
