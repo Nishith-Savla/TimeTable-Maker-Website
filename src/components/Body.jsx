@@ -1,8 +1,7 @@
-import Button from "../common/Button";
 import Table from "../common/Table";
 import { allowDrop } from "../utils";
 
-const Body = ({ currentSem, table, onTableSet, onTableClear, onDrop }) => {
+const Body = ({ currentSem, table, onTableSet, onDrop }) => {
   return (
     <div className="app-body">
       <Table
@@ -31,12 +30,6 @@ const Body = ({ currentSem, table, onTableSet, onTableClear, onDrop }) => {
         contentEditable
         onChange={onTableSet}
         state={table[currentSem]}
-      />
-      <Button
-        className="button clear"
-        name="clear"
-        text="Clear"
-        onClick={onTableClear}
       />
     </div>
   );

@@ -268,6 +268,7 @@ function App() {
         onInput={handleAddButtonInput}
         onKeyUp={handleAddButtonKeyUp}
         onDownload={downloadPDF}
+        onTableClear={handleTableClear}
         onDepartmentChange={handleDepartmentChange}
       />
       <Body
@@ -275,7 +276,6 @@ function App() {
         table={table[currentDepartment]}
         onDrop={handleDrop}
         onTableSet={handleTableSet}
-        onTableClear={handleTableClear}
       />
     </>
   );

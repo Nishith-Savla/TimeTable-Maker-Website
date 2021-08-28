@@ -2,6 +2,7 @@ import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { ReactComponent as Cross } from "../assets/Cross.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
+import { ReactComponent as Delete } from "../assets/Delete.svg";
 import { drag } from "../utils";
 import departments from "../data/departments.json";
 import YearPicker from "../common/YearPicker";
@@ -21,6 +22,7 @@ const Header = ({
   onInput,
   onKeyUp,
   onDownload,
+  onTableClear,
   onDepartmentChange,
 }) => {
   const isMobile = () => {
@@ -98,6 +100,14 @@ const Header = ({
           onClick={onDownload}
         >
           <FileDownload />
+        </Button>
+        <Button
+          className="button clear"
+          name="clear"
+          text="Clear"
+          onClick={onTableClear}
+        >
+          <Delete />
         </Button>
       </div>
 

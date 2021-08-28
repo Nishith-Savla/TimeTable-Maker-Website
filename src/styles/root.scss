@@ -27,6 +27,17 @@ $grey: #ddd;
   align-items: center;
 }
 
+%header-svg-white {
+  svg {
+    margin-left: 5px;
+
+    path {
+      stroke: white;
+      stroke-width: 1.5px;
+    }
+  }
+}
+
 body,
 html {
   margin: 0;
@@ -66,7 +77,6 @@ button {
 
 .params-select {
   display: flex;
-  justify-content: space-evenly;
   margin: 10px unquote("min(20px, 5%)");
 
   .dropdowns {
@@ -101,10 +111,25 @@ button {
       }
     }
   }
+
+  .download {
+    background-color: #019e1b;
+    color: white;
+
+    @extend %header-svg-white;
+  }
+
+  .clear {
+    margin-left: 40px;
+    background-color: crimson;
+    color: white;
+
+    @extend %header-svg-white;
+  }
 }
 
 .button {
-  padding: 6px;
+  padding: 6px 10px;
   background: $grey;
   border-radius: 25px;
   display: flex;
@@ -112,7 +137,7 @@ button {
   transition: all 0.5s ease;
 
   svg {
-    margin: 0px 10px;
+    margin-left: 10px;
     background-color: transparent;
   }
 }
@@ -127,7 +152,6 @@ button {
   .teacher,
   .batch,
   .room {
-    padding: 6px 2px 6px 10.5px;
     margin: 5px 15px;
     letter-spacing: 0.02ch;
   }
