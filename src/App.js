@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useReducer, useRef } from "react";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import { getShortFormOfName, BATCHES_REGEX, NBSP } from "./utils";
+import { getShortFormOfName, containsLab, BATCHES_REGEX, NBSP } from "./utils";
 import departments from "./data/departments.json";
 
 import "./styles/root.scss";
@@ -125,12 +125,7 @@ function App() {
       cell => cell.time === time && cell.day === day
     )[0];
 
-    if (
-      currentCell?.draggedTexts?.some(draggedText =>
-        / (lab|workshop)\)?( \(\d{1,2}\))?$/i.test(draggedText)
-      ) &&
-      data.classList.contains("teacher")
-    )
+    if (containsLab(currentCell) && data.classList.contains("teacher"))
       text = getShortFormOfName(text);
 
     const prevText = e.target.innerText;

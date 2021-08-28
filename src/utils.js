@@ -7,6 +7,11 @@ const getShortFormOfName = name => {
   return splitNames[0] + splitNames[1] + splitNames[2][0];
 };
 
+const containsLab = cell => {
+  const labRegex = / (lab|workshop)\)?( \(\d{1,2}\))?$/i;
+  return cell?.draggedTexts?.some(draggedText => labRegex.test(draggedText));
+};
+
 const columnWidths = [8, 14, 14, 4, 14, 14, 4, 14, 14];
 
 const placeCursorAtPosition = (e, func) => {
@@ -39,6 +44,7 @@ const drag = ev => ev.dataTransfer.setData("text", ev.target.id);
 
 export {
   getShortFormOfName,
+  containsLab,
   columnWidths,
   placeCursorAtPosition,
   allowDrop,

@@ -28,7 +28,7 @@ const Table = ({
       </thead>
       <tbody>
         {rows.map(row => (
-          <tr>
+          <tr key={row}>
             <th style={{ minWidth: `${columnWidths[0]}%` }}>{row}</th>
             {columns.slice(1).map((column, index) => {
               const isBreak = column.endsWith("Break");
