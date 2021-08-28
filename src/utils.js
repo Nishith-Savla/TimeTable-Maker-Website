@@ -3,7 +3,6 @@ const NBSP = "\xa0";
 
 const getShortFormOfName = name => {
   const splitNames = name.split(". ");
-  console.log(splitNames[0] + splitNames[1] + splitNames[2][0]);
   return splitNames[0] + splitNames[1] + splitNames[2][0];
 };
 

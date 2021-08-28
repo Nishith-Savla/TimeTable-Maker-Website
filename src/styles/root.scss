@@ -1,8 +1,7 @@
 // Color Variables
-$color1: #4dffea;
-$color2: #cd9fff;
-$color3: #fd8248;
-$color4: #f5f514;
+$color1: hsl(173, 100%, 60%);
+$color2: hsl(60, 100%, 60%);
+$color3: hsl(113, 100%, 60%);
 $grey: #ddd;
 
 %black-border {
@@ -15,7 +14,7 @@ $grey: #ddd;
 }
 
 %selected {
-  background: linear-gradient(93deg, $color1 0%, $color4 100%);
+  background: linear-gradient(93deg, $color1 0%, $color2 100%);
   font-weight: bold;
   letter-spacing: 1px;
   transition: all 0.5s ease;
@@ -27,15 +26,20 @@ $grey: #ddd;
   align-items: center;
 }
 
-%header-svg-white {
+%header-svg {
   svg {
     margin-left: 5px;
 
     path {
-      stroke: white;
-      stroke-width: 1.5px;
+      stroke-width: 1.1px;
     }
   }
+}
+
+%hyphens-with-prefix {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 body,
@@ -50,8 +54,6 @@ html {
 }
 
 body {
-  // width: 100%;
-
   @media (max-width: 767px) {
     min-width: 800px;
     max-width: 1000px;
@@ -61,6 +63,20 @@ body {
 .app-header {
   height: 40vh;
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: -1px -1px 5px #999;
+    background: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, $color1 0%, $color2 100%);
+    border-radius: 50px;
+  }
 }
 
 .app-body {
@@ -113,18 +129,18 @@ button {
   }
 
   .download {
-    background-color: #019e1b;
-    color: white;
+    background-color: $color3;
+    // color: white;
 
-    @extend %header-svg-white;
+    @extend %header-svg;
   }
 
   .clear {
     margin-left: 40px;
-    background-color: crimson;
-    color: white;
+    background-color: hsl(0, 100%, 78%);
+    // color: white;
 
-    @extend %header-svg-white;
+    @extend %header-svg;
   }
 }
 
@@ -179,12 +195,12 @@ button {
 }
 
 .batch {
-  background: $color3;
+  background: $color1;
   padding-right: 10px !important;
 }
 
 .room {
-  background: $color4;
+  background: $color2;
   padding-right: 10px !important;
 }
 
@@ -208,21 +224,21 @@ button {
     min-height: 8vh;
   }
 
-  th {
+  th,
+  td {
     @extend %black-border;
     @extend %grid-align-center;
+    @extend %hyphens-with-prefix;
+  }
+
+  th {
     word-break: break-word;
-    hyphens: auto;
     font-size: 15px;
     font-weight: bold;
   }
 
   td {
-    @extend %black-border;
-    @extend %grid-align-center;
-    text-align: center;
     font-size: 14px;
-    hyphens: auto;
     white-space: pre-wrap;
   }
 }
