@@ -7,6 +7,7 @@ import {
   getShortFormOfName,
   containsLab,
   downloadJsonFile,
+  isValidJson,
 } from "./utils";
 import departments from "./data/departments.json";
 
@@ -36,6 +37,19 @@ function App() {
     mechanical: {},
     civil: {},
   };
+  const tableSchema = {
+    type: "object",
+    properties: {
+      computer: { type: "object" },
+      electrical: { type: "object" },
+      industrial: { type: "object" },
+      mechanical: { type: "object" },
+      civil: { type: "object" },
+    },
+    required: ["computer", "electrical", "industrial", "mechanical", "civil"],
+    additionalProperties: false,
+  };
+
   const [table, setTable] = useState(initialTable);
   const [newSubject, setNewSubject] = useState("");
   const [newTeacher, setNewTeacher] = useState("");
@@ -249,7 +263,6 @@ function App() {
   };
 
   const handleJSONUpload = e => {
-    console.log(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = () => {
       let data;
@@ -258,7 +271,8 @@ function App() {
       } catch (error) {
         alert(error);
       }
-      data && setTable(data);
+      if (data && isValidJson(tableSchema, data)) setTable(data);
+      else alert("Invalid file.");
     };
 
     try {

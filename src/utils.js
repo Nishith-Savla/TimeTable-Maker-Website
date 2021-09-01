@@ -1,3 +1,5 @@
+import Ajv from "ajv";
+
 const BATCHES_REGEX = /^[CMEI]E?[1-3]/;
 const NBSP = "\xa0";
 
@@ -59,6 +61,10 @@ const downloadJsonFile = (
   a.remove();
 };
 
+const isValidJson = (schema, data) => {
+  return new Ajv().compile(schema)(data);
+};
+
 export {
   BATCHES_REGEX,
   NBSP,
@@ -69,4 +75,5 @@ export {
   allowDrop,
   drag,
   downloadJsonFile,
+  isValidJson,
 };
