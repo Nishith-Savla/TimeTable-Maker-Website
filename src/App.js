@@ -1,7 +1,13 @@
 import { useState, useEffect, useMemo, useReducer, useRef } from "react";
 import Body from "./components/Body";
 import Header from "./components/Header";
-import { getShortFormOfName, containsLab, BATCHES_REGEX, NBSP } from "./utils";
+import {
+  BATCHES_REGEX,
+  NBSP,
+  getShortFormOfName,
+  containsLab,
+  downloadJsonFile,
+} from "./utils";
 import departments from "./data/departments.json";
 
 import "./styles/root.scss";
@@ -21,6 +27,7 @@ function App() {
   const { batches, rooms } = departments[currentDepartment];
   const [isOddTerm, toggleIsOddTerm] = useReducer(state => !state, true);
   const yearPickerRef = useRef(new Date().getFullYear());
+  const downloadTypeRef = useRef("pdf");
   const [currentSem, setCurrentSem] = useState(1);
   const initialTable = {
     computer: {},
@@ -241,27 +248,58 @@ function App() {
     }
   };
 
-  const downloadPDF = () => {
-    DomToImage.toPng(document.querySelector(".timetable")).then(dataURL => {
-      // eslint-disable-next-line new-cap
-      const doc = new jsPDF("landscape");
-      doc.setFontSize(20);
-      doc.text(`K. J. Somaiya Polytechnic`, 115, 10);
-      doc.text(
-        `${isOddTerm ? "Winter" : "Summer"} ${yearPickerRef.current.value}`,
-        130,
-        20
+  const handleJSONUpload = e => {
+    console.log(e.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = () => {
+      let data;
+      try {
+        data = JSON.parse(reader.result);
+      } catch (error) {
+        alert(error);
+      }
+      data && setTable(data);
+    };
+
+    try {
+      reader.readAsText(e.target.files[0]);
+    } catch (error) {
+      alert("File not uploaded.");
+    }
+  };
+
+  const handleDownload = () => {
+    if (downloadTypeRef.current.value === "pdf")
+      DomToImage.toPng(document.querySelector(".timetable")).then(dataURL => {
+        // eslint-disable-next-line new-cap
+        const doc = new jsPDF("landscape");
+        doc.setFontSize(20);
+        doc.text(`K. J. Somaiya Polytechnic`, 115, 10);
+        doc.text(
+          `${isOddTerm ? "Winter" : "Summer"} ${yearPickerRef.current.value}`,
+          130,
+          20
+        );
+        doc.text(
+          `${departments[currentDepartment].label} Engineering`,
+          117,
+          30
+        );
+        doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 130, 40);
+        doc.text(`Semester ${currentSem}`, 135, 50);
+        doc.addImage(dataURL, 3, 60, 290, 100);
+        doc.save(
+          `${departments[currentDepartment].shortForm.toLowerCase()}-${
+            isOddTerm ? "winter" : "summer"
+          }${yearPickerRef.current.value}-sem${currentSem}.pdf`
+        );
+      });
+    else
+      downloadJsonFile(
+        table,
+        `ttmaker_table_${new Date().toISOString()}.json`,
+        2
       );
-      doc.text(`${departments[currentDepartment].label} Engineering`, 117, 30);
-      doc.text(`${isOddTerm ? "Odd" : "Even"} Semester`, 130, 40);
-      doc.text(`Semester ${currentSem}`, 135, 50);
-      doc.addImage(dataURL, 3, 60, 290, 100);
-      doc.save(
-        `${departments[currentDepartment].shortForm.toLowerCase()}-${
-          isOddTerm ? "winter" : "summer"
-        }${yearPickerRef.current.value}-sem${currentSem}.pdf`
-      );
-    });
   };
 
   // Change sems on term change
@@ -286,7 +324,9 @@ function App() {
         onAddButtonClick={handleAddButtonClick}
         onInput={handleAddButtonInput}
         onKeyUp={handleAddButtonKeyUp}
-        onDownload={downloadPDF}
+        onUpload={handleJSONUpload}
+        onDownload={handleDownload}
+        downloadTypeRef={downloadTypeRef}
         onTableClear={handleTableClear}
         onDepartmentChange={handleDepartmentChange}
       />

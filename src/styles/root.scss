@@ -128,10 +128,15 @@ button {
     }
   }
 
-  .download {
-    background-color: $color3;
-    // color: white;
+  .upload {
+    background: $color2;
+    @extend %header-svg;
+  }
 
+  .download {
+    margin-left: 40px;
+    margin-right: 10px;
+    background-color: $color3;
     @extend %header-svg;
   }
 

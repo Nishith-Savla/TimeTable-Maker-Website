@@ -2,6 +2,7 @@ import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
 import { ReactComponent as Cross } from "../assets/Cross.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
+import { ReactComponent as FileUpload } from "../assets/FileUpload.svg";
 import { ReactComponent as Delete } from "../assets/Delete.svg";
 import { drag } from "../utils";
 import departments from "../data/departments.json";
@@ -21,7 +22,9 @@ const Header = ({
   onAddButtonClick,
   onInput,
   onKeyUp,
+  onUpload,
   onDownload,
+  downloadTypeRef,
   onTableClear,
   onDepartmentChange,
 }) => {
@@ -94,6 +97,21 @@ const Header = ({
           ))}
         </div>
         <Button
+          className="button upload"
+          text="Upload"
+          name="upload"
+          onClick={() => document.getElementById("jsonUpload").click()}
+        >
+          <input
+            type="file"
+            id="jsonUpload"
+            onChange={onUpload}
+            style={{ display: "none" }}
+            accept="application/JSON"
+          />
+          <FileUpload />
+        </Button>
+        <Button
           className="button download"
           text="Download"
           name="download"
@@ -101,6 +119,16 @@ const Header = ({
         >
           <FileDownload />
         </Button>
+        <Dropdown
+          className="dropdown download-type"
+          name="downloadType"
+          dropdownRef={downloadTypeRef}
+          tooltip="Download as"
+          options={[
+            { value: "pdf", label: "PDF" },
+            { value: "json", label: "JSON" },
+          ]}
+        />
         <Button
           className="button clear"
           name="clear"
