@@ -19,17 +19,26 @@ let DomToImage;
 
 function App() {
   const [currentDepartment, setCurrentDepartment] = useState("computer");
+  const [currentSem, setCurrentSem] = useState(1);
+
   const [subjects, setSubjects] = useState(
     departments[currentDepartment].subjects
   );
   const [teachers, setTeachers] = useState(
     departments[currentDepartment].teachers
   );
-  const { batches, rooms } = departments[currentDepartment];
+
+  const [newSubject, setNewSubject] = useState("");
+  const [newTeacher, setNewTeacher] = useState("");
+
   const [isOddTerm, toggleIsOddTerm] = useReducer(state => !state, true);
+
+  // Refs
   const yearPickerRef = useRef(new Date().getFullYear());
   const downloadTypeRef = useRef("pdf");
-  const [currentSem, setCurrentSem] = useState(1);
+
+  const { batches, rooms } = departments[currentDepartment];
+
   const initialTable = {
     computer: {},
     electrical: {},
@@ -37,6 +46,7 @@ function App() {
     mechanical: {},
     civil: {},
   };
+
   const tableSchema = {
     type: "object",
     properties: {
@@ -51,8 +61,6 @@ function App() {
   };
 
   const [table, setTable] = useState(initialTable);
-  const [newSubject, setNewSubject] = useState("");
-  const [newTeacher, setNewTeacher] = useState("");
 
   const sems = [1, 2, 3, 4, 5, 6];
   let filteredSems = useMemo(
@@ -273,6 +281,8 @@ function App() {
       }
       if (data && isValidJson(tableSchema, data)) setTable(data);
       else alert("Invalid file.");
+
+      document.getElementById("jsonUpload").value = ""; // Clearing file input
     };
 
     try {
@@ -308,12 +318,7 @@ function App() {
           }${yearPickerRef.current.value}-sem${currentSem}.pdf`
         );
       });
-    else
-      downloadJsonFile(
-        table,
-        `ttmaker_table_${new Date().toISOString()}.json`,
-        2
-      );
+    else downloadJsonFile(table, "ttmaker-table.json", 2);
   };
 
   // Change sems on term change
