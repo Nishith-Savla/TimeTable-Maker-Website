@@ -87,7 +87,7 @@ const Header = ({
         <div className="sems">
           {filteredSems.map(sem => (
             <Button
-              className="sem"
+              className="button sem"
               key={sem}
               isActive={sem === currentSem}
               name={`sem${sem}`}
