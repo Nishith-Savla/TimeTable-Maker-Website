@@ -141,12 +141,12 @@ function App() {
     localStorage.setItem("table", JSON.stringify(table));
   }, [table]);
 
-  const handleDrop = (e, callback) => {
+  const handleDrop = (e, tableSetterCallback) => {
     e.preventDefault();
     const data = document.getElementById(e.dataTransfer.getData("text"));
 
     const time = e.target.id.split(" ").slice(0, -1).join(" ");
-    const day = e.target.id.split(" ").slice(-1)[0];
+    const [day] = e.target.id.split(" ").slice(-1);
 
     let text = data.classList.contains("subject")
       ? data.innerText.split(" ").slice(0, -1).join(" ")
@@ -170,7 +170,8 @@ function App() {
     }`;
 
     // ev.target.innerText = !callback(ev) ? prevText : "";
-    if (!callback(e, data.innerText)) e.target.innerText = prevText;
+    if (!tableSetterCallback(time, day, e.target.innerText, data.innerText))
+      e.target.innerText = prevText;
   };
 
   const doesClash = (time, day, text) => {
@@ -195,11 +196,7 @@ function App() {
     );
   };
 
-  const handleTableSet = (e, draggedText = "") => {
-    const time = e.target.id.split(" ").slice(0, -1).join(" ");
-    const day = e.target.id.split(" ").slice(-1)[0];
-    const text = e.target.innerText || "";
-
+  const handleTableSet = (time, day, text = "", draggedText = "") => {
     if (!doesClash(time, day, text)) {
       const index =
         table[currentDepartment][currentSem]?.findIndex(
