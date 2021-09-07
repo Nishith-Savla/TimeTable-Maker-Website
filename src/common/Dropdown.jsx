@@ -6,7 +6,7 @@ const Dropdown = ({
   options,
   className,
   onChange,
-  dropdownRef = undefined,
+  dropdownRef = null,
 }) => (
   <select
     title={tooltip}
