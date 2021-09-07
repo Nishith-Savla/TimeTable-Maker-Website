@@ -46,7 +46,7 @@ const drag = ev => ev.dataTransfer.setData("text", ev.target.id);
 const downloadJsonFile = (
   data,
   filename = "download.json",
-  jsonStringifySpace
+  jsonStringifySpace = 2
 ) => {
   // Creating a blob object from non-blob data using the Blob constructor
   const blob = new Blob([JSON.stringify(data, null, jsonStringifySpace)], {
