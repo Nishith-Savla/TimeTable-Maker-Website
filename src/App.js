@@ -1,17 +1,19 @@
-import { useState, useEffect, useMemo, useReducer, useRef } from "react";
-import Body from "./components/Body";
-import Header from "./components/Header";
+import { useEffect, useMemo, useReducer, useRef, useState } from "react";
+
+import "./styles/root.scss";
+
 import {
   BATCHES_REGEX,
   NBSP,
-  getShortFormOfName,
   containsLab,
   downloadJsonFile,
+  getShortFormOfName,
   isValidJson,
 } from "./utils";
-import departments from "./data/departments.json";
 
-import "./styles/root.scss";
+import Body from "./components/Body";
+import Header from "./components/Header";
+import departments from "./data/departments.json";
 
 let Swal;
 let jsPDF;

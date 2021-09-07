@@ -1,12 +1,14 @@
-import Dropdown from "../common/Dropdown";
 import Button from "../common/Button";
+import Dropdown from "../common/Dropdown";
+import YearPicker from "../common/YearPicker";
+
 import { ReactComponent as Cross } from "../assets/Cross.svg";
+import { ReactComponent as Delete } from "../assets/Delete.svg";
 import { ReactComponent as FileDownload } from "../assets/FileDownload.svg";
 import { ReactComponent as FileUpload } from "../assets/FileUpload.svg";
-import { ReactComponent as Delete } from "../assets/Delete.svg";
-import { drag } from "../utils";
+
 import departments from "../data/departments.json";
-import YearPicker from "../common/YearPicker";
+import { drag } from "../utils";
 
 const Header = ({
   yearPickerRef,
