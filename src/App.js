@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useReducer, useRef, useState } from "react";
-
 import "./styles/root.scss";
+
+import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 
 import {
   BATCHES_REGEX,
