@@ -12,7 +12,7 @@ const Table = ({
   onDrop,
   onDragOver,
   contentEditable,
-  onChange,
+  onInput,
   state,
 }) => {
   return (
@@ -36,12 +36,12 @@ const Table = ({
                 <td
                   id={isBreak ? "break" : `${column} ${row}`}
                   contentEditable={isBreak ? false : contentEditable}
-                  onDrop={isBreak ? null : e => onDrop(e, onChange)}
+                  onDrop={isBreak ? null : e => onDrop(e)}
                   onDragOver={isBreak ? null : e => onDragOver(e)}
                   key={column}
                   style={{ minWidth: `${columnWidths[index + 1]}%` }}
                   onInput={e => {
-                    onChange(e);
+                    onInput(e);
                     placeCursorAtEnd();
                   }}
                   suppressContentEditableWarning

@@ -141,39 +141,6 @@ function App() {
     localStorage.setItem("table", JSON.stringify(table));
   }, [table]);
 
-  const handleDrop = (e, tableSetterCallback) => {
-    e.preventDefault();
-    const data = document.getElementById(e.dataTransfer.getData("text"));
-
-    const time = e.target.id.split(" ").slice(0, -1).join(" ");
-    const [day] = e.target.id.split(" ").slice(-1);
-
-    let text = data.classList.contains("subject")
-      ? data.innerText.split(" ").slice(0, -1).join(" ")
-      : data.innerText;
-
-    const currentCell = table[currentDepartment]?.[currentSem]?.filter(
-      cell => cell.time === time && cell.day === day
-    )[0];
-
-    if (containsLab(currentCell) && data.classList.contains("teacher"))
-      text = getShortFormOfName(text);
-
-    const prevText = e.target.innerText;
-
-    e.target.innerText += `${text}${
-      (BATCHES_REGEX.test(e.target.innerText) ||
-        BATCHES_REGEX.test(data.innerText)) &&
-      (data.classList.contains("subject") || data.classList.contains("batch"))
-        ? NBSP
-        : "\n"
-    }`;
-
-    // ev.target.innerText = !callback(ev) ? prevText : "";
-    if (!tableSetterCallback(time, day, e.target.innerText, data.innerText))
-      e.target.innerText = prevText;
-  };
-
   const doesClash = (time, day, text) => {
     const filteredSlots = [];
     Object.keys(departments).forEach(department => {
@@ -244,6 +211,45 @@ function App() {
       });
     else alert(alertMsg);
     return false;
+  };
+
+  const handleDrop = e => {
+    e.preventDefault();
+    const data = document.getElementById(e.dataTransfer.getData("text"));
+
+    const time = e.target.id.split(" ").slice(0, -1).join(" ");
+    const [day] = e.target.id.split(" ").slice(-1);
+
+    let text = data.classList.contains("subject")
+      ? data.innerText.split(" ").slice(0, -1).join(" ")
+      : data.innerText;
+
+    const currentCell = table[currentDepartment]?.[currentSem]?.filter(
+      cell => cell.time === time && cell.day === day
+    )[0];
+
+    if (containsLab(currentCell) && data.classList.contains("teacher"))
+      text = getShortFormOfName(text);
+
+    const prevText = e.target.innerText;
+
+    e.target.innerText += `${text}${
+      (BATCHES_REGEX.test(e.target.innerText) ||
+        BATCHES_REGEX.test(data.innerText)) &&
+      (data.classList.contains("subject") || data.classList.contains("batch"))
+        ? NBSP
+        : "\n"
+    }`;
+
+    // ev.target.innerText = !callback(ev) ? prevText : "";
+    if (!handleTableSet(time, day, e.target.innerText, data.innerText))
+      e.target.innerText = prevText;
+  };
+
+  const handleTableInput = e => {
+    const time = e.target.id.split(" ").slice(0, -1).join(" ");
+    const [day] = e.target.id.split(" ").slice(-1);
+    handleTableSet(time, day, e.target.innerText);
   };
 
   const handleTableClear = () => {
@@ -352,7 +358,7 @@ function App() {
         currentSem={currentSem}
         table={table[currentDepartment]}
         onDrop={handleDrop}
-        onTableSet={handleTableSet}
+        onTableInput={handleTableInput}
       />
     </>
   );

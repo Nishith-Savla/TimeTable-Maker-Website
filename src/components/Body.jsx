@@ -1,7 +1,7 @@
 import Table from "../common/Table";
 import { allowDrop } from "../utils";
 
-const Body = ({ currentSem, table, onTableSet, onDrop }) => {
+const Body = ({ currentSem, table, onTableInput, onDrop }) => {
   return (
     <div className="app-body">
       <Table
@@ -28,7 +28,7 @@ const Body = ({ currentSem, table, onTableSet, onDrop }) => {
         onDrop={onDrop}
         onDragOver={allowDrop}
         contentEditable
-        onChange={onTableSet}
+        onInput={onTableInput}
         state={table[currentSem]}
       />
     </div>
