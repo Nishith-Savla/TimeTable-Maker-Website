@@ -1,7 +1,7 @@
 {
   "extends": ["eslint:recommended", "airbnb", "prettier"],
   "env": { "browser": true },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "rules": {
     "no-plusplus": "off",
     // allow jsx syntax in js files
