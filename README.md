@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Timetable Maker Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A timetable maker website for K. J. Somaiya Polytechnic that efficiently creates timetables and prevents scheduling conflicts between faculty and rooms.
 
-## Available Scripts
+## Features 
 
-In the project directory, you can run:
+- Ease of Use
+- Drag and Drop
+- Concurrent Editing of Multiple Timetables
+- Data persistence using JSON and Local Storage
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Screenshots
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Dragging 
+![Dragging](https://user-images.githubusercontent.com/63643696/229769523-20789112-c52b-4f19-9468-b83fdd6d8c74.png)
 
-### `npm test`
+#### Add Multiple Elements to Single Cell
+![Multiple Elements](https://user-images.githubusercontent.com/63643696/229769529-79764cb3-b8d0-4025-b535-7fcbdc0f30c5.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Concurrent Editing of Multiple Timetables
+![Concurrent Editing of Multiple Timetables](https://user-images.githubusercontent.com/63643696/229769518-ef652e83-363d-4c70-960c-267cab1f0b54.png)
 
-### `npm run build`
+#### Clash Check
+![Clash Check](https://user-images.githubusercontent.com/63643696/229769514-0c3a7e83-fc19-46a7-9ec5-6fa98b09104e.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Save progress as JSON for later access
+![Save JSON](https://user-images.githubusercontent.com/63643696/229769531-a96735df-bab0-460b-a900-bf7cae19ea0c.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Final PDF Format
+![Final PDF](https://user-images.githubusercontent.com/63643696/229769527-8258596d-e4c4-410e-9653-f66e901c98a3.png)
